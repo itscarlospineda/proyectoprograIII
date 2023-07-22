@@ -1,0 +1,14 @@
+{
+  "name": "proyectoprograiii",
+  "version": "1.0.0",
+  "description": "Proyecto Final - Programación III",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sindy Hernández / Carlos Andrés Pineda / Joel Ramirez / Franklin Zerón",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
