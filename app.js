@@ -29,7 +29,7 @@ var config = {
         type: 'default',
         options: {
             userName: 'root',
-            password: 'pepito123'
+            password: '//'
         }
     },
     options: {
@@ -44,11 +44,11 @@ connection.on('connect', function (err) {
 connection.connect();
 
 app.get('/', function (req, res) {
-    res.render('perfiles');
+    res.render('programas');
 });
 
 
 //inicializando el server
 app.listen(app.get('port'), () => {
-    console.log("PUERTO 3000");
+    console.log("frecuencias 3000");
 });
