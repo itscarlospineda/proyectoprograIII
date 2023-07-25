@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const correosController = require('../Controller/correos');
+const correosController = require('../Controller/correoscontroller');
 router.get('/', correosController.list);
 router.post('/add', correosController.save);
 router.get('/delete/:idcorreo', correosController.delete);
