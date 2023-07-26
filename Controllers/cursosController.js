@@ -1,58 +1,53 @@
-const controller = {};
-//Funcion para listar registros
-controller.list = (req, res) => {
-    req.getConnection((error, conn) => {
-        conn.query('select *from cursos', (err, idcurso) => {
-            if (err) {
-                res.json(err);
-            }
-        });
+const conexion = require('../database');
 
-    }
-    );
-};
+//ACTUALIZAR TODO EL CODIGO SIGUIENTE
 
-//Funcion para guardar registros
-controller.save = (req, res) => {
-    const idcurso = req.body;
-    req.getConnection((err, conn) => {
-        conn.query('insert into cursos set?', [idcurso], (err, cursos) => {
-            console.log(cursos);
-            res.redirect('/');
-        });
-    })
-};
+//GUARDAR un REGISTRO
 
-//Funcion para listar registros
-controller.edit = (req, res) => {
-    const { idcurso } = req.params;
-    req.getConnection((err, conn) => {
-        conn.query('select *from cursos where idcurso=?', [idcurso], (err, cursos) => {
-            res.render('cursos_edit', {
-                data: cursos[0]
-            });
-        });
+exports.guardarcursos = (req, res) => {
+    const idcurso = req.body.idcurso;
+    const idprograma = req.body.idprograma;
+    const descripcion = req.body.descripcion;
+    const objetivos = req.body.objetivos;
+    const requisitos = req.body.requisitos;
+    const precio = req.body.precio;
+    const duracion = req.body.duracion;
+    const estado = req.body.estado;
+
+
+
+    conexion.query('INSERT INTO cursos SET?', {
+        idcurso: idcurso, idprograma: idprograma,
+        descripcion: descripcion, objetivos: objetivos, requisitos: requisitos, precio: precio,
+        duracion: duracion, estado: estado
+    }, (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/cursos');
+        }
     });
 };
 
-//Funcion para actualizar
-controller.update = (req, res) => {
-    const { idcurso } = req.params;
-    const nuevo_idcurso = req.body;
-    req.getConnection((err, conn) => {
-        conn.query('update cursos set ? where idcurso=?', [nuevo_idcurso, idcurso], (err, cursos) => {
-            res.redirect('/');
-        });
+//ACTUALIZAR un REGISTRO
+exports.actualizacursos = (req, res) => {
+    const idcurso = req.body.idcurso;
+    const idprograma = req.body.idprograma;
+    const descripcion = req.body.descripcion;
+    const objetivos = req.body.objetivos;
+    const requisitos = req.body.requisitos;
+    const precio = req.body.precio;
+    const duracion = req.body.duracion;
+    const estado = req.body.estado;
+
+    conexion.query('UPDATE cursos SET ? WHERE idcurso=?', [{
+        idprograma: idprograma, descripcion: descripcion,
+        objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado: estado
+    }, idcurso], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/cursos');
+        }
     });
 };
-
-//Funcion para Eliminar registros
-controller.delete = (req, res) => {
-    const { idcurso } = req.params;
-    req.getConnection((err, conn) => {
-        conn.query('delete from cursos where idcurso =?', [idcurso], (err, cursos) => {
-            res.redirect('/');
-        });
-    })
-};
-module.exports = controller;

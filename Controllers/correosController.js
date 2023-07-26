@@ -2,40 +2,37 @@ const conexion = require('../database');
 
 
 //ACTUALIZAR TODO EL CODIGO SIGUIENTE
+//<GUARDAR un REGISTRO
 
-//GUARDAR un REGISTRO
-/*
-exports.guardarfpago = (req, res)=>{
-    const idfpago = req.body.idfpago;
-    const idempresa = req.body.idempresa;
-    const formapago = req.body.formapago;
-    const estado = req.body.estado;
-    
-    conexion.query('INSERT INTO FORMAPAGO SET ?',{idfpago:idfpago, idempresa:idempresa, 
-        formapago:formapago, estado:estado}, (error, results)=>{
-        if(error){
+exports.guardarcorreos = (req, res) => {
+    const idcorreo = req.body.idcorreo;
+    const idprofesor = req.body.idprofesor;
+    const correo = req.body.correo;
+
+    conexion.query('INSERT INTO correos SET ?', {
+        idcorreo: idcorreo, idprofessor: idprofesor,
+        correo: correo
+    }, (error, results) => {
+        if (error) {
             console.log(error);
-        }else{ 
-            res.redirect('/formapago');         
+        } else {
+            res.redirect('/correos');
         }
     });
 };
 
 
 //ACTUALIZAR un REGISTRO
-exports.actualizafpago = (req, res)=>{
-    const idfpago = req.body.idfpago;
-    const idempresa = req.body.idempresa;
-    const formapago = req.body.formapago;
-    const estado = req.body.estado;
+exports.actualizarcorreos = (req, res) => {
+    const idcorreo = req.body.idcorreo;
+    const idprofesor = req.body.idprofesor;
+    const correo = req.body.correo;
 
-    conexion.query('UPDATE FORMAPAGO SET ? WHERE IDFPAGO =?', [{idempresa:idempresa, formapago:formapago, 
-        estado:estado}, idfpago ], (error, results)=>{
-        if(error){
+    conexion.query('UPDATE correos SET ? WHERE idcorreo =?', [{ idprofesor: idprofesor, correo: correo }, idcorreo], (error, results) => {
+        if (error) {
             console.log(error);
-        }else{           
-            res.redirect('/formapago');         
+        } else {
+            res.redirect('/correos');
         }
     });
 };
-*/

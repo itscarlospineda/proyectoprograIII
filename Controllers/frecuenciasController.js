@@ -1,58 +1,44 @@
-const controller = {};
-//Funcion para listar registros
-controller.list = (req, res) => {
-    req.getConnection((error, conn) => {
-        conn.query('select *from frecuencias', (err, idfrecuencia) => {
-            if (err) {
-                res.json(err);
-            }
-        });
+const conexion = require('../database');
 
-    }
-    );
-};
+//ACTUALIZAR TODO EL CODIGO SIGUIENTE
 
-//Funcion para guardar registros
-controller.save = (req, res) => {
-    const idfrecuencia = req.body;
-    req.getConnection((err, conn) => {
-        conn.query('insert into frecuencias set?', [idfrecuencia], (err, frecuencias) => {
-            console.log(frecuencias);
-            res.redirect('/');
-        });
-    })
-};
+//GUARDAR un REGISTRO
 
-//Funcion para listar registros
-controller.edit = (req, res) => {
-    const { idfrecuencia } = req.params;
-    req.getConnection((err, conn) => {
-        conn.query('select *from frecuencias where idfrecuencia=?', [idfrecuencia], (err, frecuencias) => {
-            res.render('frecuencias_edit', {
-                data: frecuencias[0]
-            });
-        });
+exports.guardarfrecuencias = (req, res) => {
+    const idfrecuencia = req.body.idfrecuencia;
+    const descripcion = req.body.descripcion;
+    const horainicio = req.body.horainicio;
+    const horafin = req.body.horafin;
+    const estado = req.body.estado;
+
+
+    conexion.query('INSERT INTO frecuencias SET ?', {
+        idfrecuencia: idfrecuencia, descripcion: descripcion,
+        horainicio: horainicio, horafin: horafin, estado: estado
+    }, (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/frecuencias');
+        }
     });
 };
+//ACTUALIZAR un REGISTRO
+exports.actualizafrecuencias = (req, res) => {
+    const idfrecuencia = req.body.idfrecuencia;
+    const descripcion = req.body.descripcion;
+    const horainicio = req.body.horainicio;
+    const horafin = req.body.horafin;
+    const estado = req.body.estado;
 
-//Funcion para actualizar
-controller.update = (req, res) => {
-    const { idfrecuencia } = req.params;
-    const nuevo_idfrecuencia = req.body;
-    req.getConnection((err, conn) => {
-        conn.query('update frecuencias set ? where idfrecuencia=?', [nuevo_idfrecuencia, idfrecuencia], (err, frecuencias) => {
-            res.redirect('/');
-        });
+    conexion.query('UPDATE correos SET ? WHERE idfrecuencia =?', [{
+        descripcion: descripcion, horainicio: horainicio,
+        horafin: horafin, estado: estado
+    }, idfrecuencia], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/frecuencias');
+        }
     });
 };
-
-//Funcion para Eliminar registros
-controller.delete = (req, res) => {
-    const { idfrecuencia } = req.params;
-    req.getConnection((err, conn) => {
-        conn.query('delete from frecuencia where idfrecuencia=?', [idfrecuencia], (err, frecuencia) => {
-            res.redirect('/');
-        });
-    })
-};
-module.exports = controller;
