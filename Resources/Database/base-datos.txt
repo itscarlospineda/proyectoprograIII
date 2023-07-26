@@ -1,0 +1,165 @@
+create database programacion
+show databases
+use programacion
+CREATE TABLE `programas`(
+    `idprograma` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `titulo` VARCHAR(100),
+    `descripcion`  VARCHAR(200),
+   `objetivos`  VARCHAR(200),
+   `requisitos`  VARCHAR(200),
+   `precio`  DOUBLE(13,2),
+   `duracion`  double(13,2),
+   `estado`  VARCHAR(1)
+);
+CREATE TABLE `cursos`(
+    `idcurso` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `idprograma` INT,
+    `descripcion`  VARCHAR(200),
+   `objetivos`  VARCHAR(200),
+   `requisitos`  VARCHAR(200),
+   `precio`  DOUBLE(13,2),
+   `duracion`  double(13,2),
+   `estado`  VARCHAR(1)
+);
+
+SHOW TABLES;
+CREATE TABLE `perfiles`(
+    `idperfil` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `idprograma` INT(11),
+    `idprofesor` INT(11),
+   `estado`  VARCHAR(1)
+);
+
+CREATE TABLE `profesores`(
+    `idprofesor` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `appaterno`  VARCHAR(50),
+   `apmaterno`  VARCHAR(50),
+    `nombres`  VARCHAR(50),
+   `nacimiento` DATE,
+   `direccion`  VARCHAR(200),
+   `referencia`  VARCHAR(200),
+`genero`  VARCHAR(1),
+   `estado`  VARCHAR(1)
+);
+CREATE TABLE `telefonos`(
+    `idtelefono` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `idprofesor`  INT(11),
+   `telefono`  VARCHAR(20)
+);
+
+
+CREATE TABLE `correos`(
+    `idcorreo` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `idprofesor`  INT(11),
+   `correo`  VARCHAR(200)
+);
+
+CREATE TABLE `horarios`(
+    `idhorario` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+     `idperfil` INT (11),
+      `idlaboratorio` INT (11),
+       `idfrecuencia` INT (11),
+   `fechainicio` DATE,
+   `fechafin` DATE,
+   `estado`  VARCHAR(1)
+);
+CREATE TABLE `laboratorios`(
+    `idlaboratorio` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `descripcion`  VARCHAR(8),
+   `local`  VARCHAR(8),
+   `estado`  VARCHAR(1)
+);
+
+
+CREATE TABLE `frecuencias`(
+    `idfrecuencia` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `descripcion`  VARCHAR(8),
+      `horainicio`  VARCHAR(10),
+      `horafin`  VARCHAR(10),
+   `estado`  VARCHAR(1)
+);
+
+
+INSERT INTO programas ( titulo, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('Adobe', 'Editor', 'Desarrollar y entender planos', 'Ninguno', 120.00, 6,  '1');
+
+INSERT INTO programas ( titulo, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('Filmora', 'Editor de video', 'Crear contenido audiovisual', 'Ninguno', 130.00, 12,  '1');
+
+INSERT INTO programas ( titulo, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('Powton', 'Animacion', 'Crear contenido animado', 'Ninguno', 150.00, 8,  '1');
+
+
+
+
+INSERT INTO cursos ( idprograma, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('1', 'Conocimiento de suite adobe', 'Conocer el funcionamiento de la suite adobe', 'Ninguno', 1200.00, 6,  '1');
+
+INSERT INTO cursos ( idprograma, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('2', 'Desarrollo de material audiovisual', ' Aplicar las habilidades de diseño y creatividad', 'Ninguno', 
+1300.00, 5,  '1');
+
+INSERT INTO cursos ( idprograma, descripcion, objetivos, requisitos, precio, duracion, estado) VALUES 
+('3', 'Aprender a desarrollar presentaciones animadas', 'Desarrollar la habilidad de animacion', 'Ninguno', 
+800.00, 6,  '1');
+
+
+
+
+INSERT INTO profesores ( appaterno, apmaterno,  nombres, nacimiento, direccion, referencia, genero, estado) VALUES
+ ('Dubon', 'Gonzales', 'Jose Luis', '1996/06/06', 'Quimistan, Santa Barbara', 'Ninguna','M' , '1');
+
+INSERT INTO profesores ( appaterno, apmaterno,  nombres, nacimiento, direccion, referencia, genero, estado) VALUES
+ ('Paz', 'Lopez', 'Carmen Danelia', '1994/08/01', 'San Pedro Sula', 'Ninguna','F' , '1');
+
+INSERT INTO profesores ( appaterno, apmaterno,  nombres, nacimiento, direccion, referencia, genero, estado) VALUES
+ ('Valle', 'Ruiz', 'Miguel Alfredo', '1986/03/09', 'Puerto Cortes', 'Ninguna','M' , '1');
+
+
+
+
+INSERT INTO perfiles ( idprograma, idprofesor,  estado) VALUES ('1', '1',  '1');
+INSERT INTO perfiles ( idprograma, idprofesor,  estado) VALUES ('2', '2',  '1');
+INSERT INTO perfiles ( idprograma, idprofesor,  estado) VALUES ('3', '3',  '1');
+
+
+
+
+INSERT INTO correos ( idprofesor,  correo) VALUES (1, 'josedubo32@gmail.com');
+INSERT INTO correos ( idprofesor,  correo) VALUES (2, 'pazdanelia87@.com');
+INSERT INTO correos ( idprofesor, correo) VALUES (3, 'miguelruiz@gmail.com');
+
+
+
+
+INSERT INTO telefonos ( idprofesor,  telefono) VALUES (1, 95130978);
+INSERT INTO telefonos ( idprofesor,  telefono) VALUES (2, 97560288);
+INSERT INTO telefonos ( idprofesor,  telefono) VALUES (3, 99896549);
+
+
+
+
+INSERT INTO laboratorios( descripcion, local,  estado) VALUES ('Biologia', '1',  '1');
+INSERT INTO laboratorios( descripcion, local,  estado) VALUES ('Quimica', '2',  '1');
+INSERT INTO laboratorios( descripcion, local,  estado) VALUES ('Fisica', '3',  '1');
+
+
+
+
+
+INSERT INTO horarios ( idperfil, idlaboratorio, idfrecuencia, fechainicio, fechafin, estado) VALUES 
+(1,1,1, '2023/04/08','2023/08/08','1' );
+
+INSERT INTO horarios ( idperfil, idlaboratorio, idfrecuencia, fechainicio, fechafin, estado) VALUES 
+(2,2,2, '2023/04/08','2023/08/08','1' );
+
+INSERT INTO horarios ( idperfil, idlaboratorio, idfrecuencia, fechainicio, fechafin, estado) VALUES 
+(3,3,3, '2023/04/08','2023/08/08','1' );
+
+
+
+
+
+INSERT INTO frecuencias( descripcion, horainicio, horafin, estado) VALUES ('DMV', '08:00 AM', '11:00 AM', '1');
+INSERT INTO frecuencias( descripcion, horainicio, horafin, estado) VALUES ('PMV', '08:00 AM', '11:00 AM', '1');
+INSERT INTO frecuencias( descripcion, horainicio, horafin, estado) VALUES ('VIRTUAL', '08:00 AM', '11:00 AM', '1');
