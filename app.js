@@ -26,9 +26,9 @@ app.use('/', require('./Routes/frecuencias'));
 app.use('/', require('./Routes/perfiles'));
 app.use('/', require('./Routes/programas'));
 app.use('/', require('./Routes/telefonos'));
-app.use('/', require('./Routes/profesores'));
+/*app.use('/', require('./Routes/profesores'));
 app.use('/', require('./Routes/horarios'));
-app.use('/', require('./Routes/laboratorios'));
+app.use('/', require('./Routes/laboratorios'));*/
 
 //Rutas por cada tabla
 app.use('/correos', require('./Routes/correos'));
@@ -37,9 +37,9 @@ app.use('/frecuencias', require('./Routes/frecuencias'));
 app.use('/perfiles', require('./Routes/perfiles'));
 app.use('/programas', require('./Routes/programas'));
 app.use('/telefonos', require('./Routes/telefonos'));
-app.use('/profesores', require('./Routes/profesores'));
+/*app.use('/profesores', require('./Routes/profesores'));
 app.use('/horarios', require('./Routes/horarios'));
-app.use('/laboratorios', require('./Routes/laboratorios'));
+app.use('/laboratorios', require('./Routes/laboratorios'));*/
 
 
 

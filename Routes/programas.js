@@ -48,7 +48,7 @@ router.get('/editarprogramas/:idprograma', (req, res) => {
 });
 
 
-const correos = require('../Controllers/programasController');
+const programas = require('../Controllers/programasController');
 router.post('/guardarprogramas', programas.guardarprogramas);
 router.post('/actualizarprogramas', programas.actualizarprogramas);
 

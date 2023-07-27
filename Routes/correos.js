@@ -42,7 +42,7 @@ router.get('/editarcorreos/:idcorreo', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/correosViews/editarcorreos.ejs', { correos: results[0] });
+            res.render('../Views/correosViews/editarcorreos.ejs', {correos:results[0]});
         }
     });
 });

@@ -48,7 +48,7 @@ router.get('/editarperfiles/:idperfil', (req, res) => {
 });
 
 
-const correos = require('../Controllers/perfilesController');
+const perfiles = require('../Controllers/perfilesController');
 router.post('/guardarperfiles', perfiles.guardarperfiles);
 router.post('/actualizarperfiles', perfiles.actualizarperfiles);
 
