@@ -2,38 +2,37 @@ const conexion = require('../database');
 
 
 //ACTUALIZAR TODO EL CODIGO SIGUIENTE
-//<GUARDAR un REGISTRO
+//GUARDAR un REGISTRO
 
-/*exports.guardarcorreos = (req, res) => {
-    const idcorreo = req.body.idcorreo;
+exports.guardartelefonos = (req, res) => {
+    const idtelefono = req.body.idtelefono;
     const idprofesor = req.body.idprofesor;
-    const correo = req.body.correo;
+    const telefono = req.body.telefono;
 
-    conexion.query('INSERT INTO correos SET ?', {
-        idcorreo: idcorreo, idprofessor: idprofesor,
-        correo: correo
+    conexion.query('INSERT INTO telefonos SET ?', {
+        idtelefono: idtelefono, idprofessor: idprofesor,
+        telefono: telefono
     }, (error, results) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/correos');
+            res.redirect('/telefonos');
         }
     });
 };
 
 
 //ACTUALIZAR un REGISTRO
-exports.actualizarcorreos = (req, res) => {
-    const idcorreo = req.body.idcorreo;
+exports.actualizartelefonos = (req, res) => {
+    const idtelefono = req.body.idtelefono;
     const idprofesor = req.body.idprofesor;
-    const correo = req.body.correo;
+    const telefono = req.body.telefono;
 
-    conexion.query('UPDATE correos SET ? WHERE idcorreo =?', [{ idprofesor: idprofesor, correo: correo }, idcorreo], (error, results) => {
+    conexion.query('UPDATE telefono SET ? WHERE idtelefono =?', [{ idprofesor: idprofesor, telefono: telefono }, idtelefono], (error, results) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/correos');
+            res.redirect('/telefonos');
         }
     });
 };
-*/
