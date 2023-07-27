@@ -26,7 +26,7 @@ router.get('/crearperfiles', (req, res) => {
 
 
 router.get('/deleteperfiles/:idperfil', (req, res) => {
-    const idprograma = req.params.idprograma;
+    const idperfil = req.params.idperfil;
     conexion.query('DELETE FROM perfiles WHERE idperfil= ?', [idperfil], (error, results) => {
         if (error) {
             console.log(error);
@@ -37,7 +37,7 @@ router.get('/deleteperfiles/:idperfil', (req, res) => {
 });
 
 router.get('/editarperfiles/:idperfil', (req, res) => {
-    const idprograma = req.params.idprograma;
+    const idperfil = req.params.idperfil;
     conexion.query('SELECT * FROM perfiles WHERE idperfil=?', [idperfil], (error, results) => {
         if (error) {
             throw error;
