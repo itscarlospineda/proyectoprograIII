@@ -28,7 +28,7 @@ exports.guardarcursos = (req, res) => {
 };
 
 //ACTUALIZAR un REGISTRO
-exports.actualizacursos = (req, res) => {
+exports.actualizarcursos = (req, res) => {
     const idcurso = req.body.idcurso;
     const idprograma = req.body.idprograma;
     const descripcion = req.body.descripcion;
@@ -39,7 +39,7 @@ exports.actualizacursos = (req, res) => {
     const estado = req.body.estado;
 
     conexion.query('UPDATE cursos SET ? WHERE idcurso=?', [{ idprograma: idprograma, descripcion: descripcion,
-        objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado: estado}, idcurso],
+        objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado:estado}, idcurso],
          (error, results) => {
         if (error) {
             console.log(error);
