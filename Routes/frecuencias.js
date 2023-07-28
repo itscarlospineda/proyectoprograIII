@@ -25,7 +25,7 @@ router.get('/crearfrecuencias', (req, res) => {
 })
 
 
-router.get('/deletefrecuencias/:idcurso', (req, res) => {
+router.get('/deletefrecuencias/:idfrecuencia', (req, res) => {
     const idfrecuencia = req.params.idfrecuencia;
     conexion.query('DELETE FROM frecuencias WHERE idfrecuencia= ?', [idfrecuencia], (error, results) => {
         if (error) {

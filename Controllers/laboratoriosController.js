@@ -4,14 +4,14 @@ const conexion = require('../database');
 //ACTUALIZAR TODO EL CODIGO SIGUIENTE
 //<GUARDAR un REGISTRO
 
-exports.guardar = (req, res) => {
+exports.guardarlaboratorios = (req, res) => {
     const idlaboratorio = req.body.idlaboratorio;
     const descripcion = req.body.descripcion;
     const local = req.body.local
     const estado = req.body.estado;
 
     conexion.query('INSERT INTO laboratorios SET ?', [{ idlaboratorio: idlaboratorio, descripcion: descripcion,
-        local: local}], (error, results) => {
+        local: local, estado:estado}], (error, results) => {
 
         if (error) {
             console.log(error);
@@ -30,7 +30,7 @@ exports.actualizarlaboratorios = (req, res) => {
     const estado = req.body.estado;
 
     conexion.query('UPDATE laboratorios SET ? WHERE idlaboratorio =?', [{ descripcion: descripcion, local: local, 
-        estado:estado }, idprograma], (error, results) => {
+        estado:estado }, idlaboratorio], (error, results) => {
             
         if (error) {
             console.log(error);

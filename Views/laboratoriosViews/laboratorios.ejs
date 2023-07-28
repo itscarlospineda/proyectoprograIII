@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTRO DE CURSOS</title>
+    <title>REGISTRO DE LABORATORIOS</title>
     <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
@@ -39,15 +39,15 @@
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" 
                 aria-haspopup="true" aria-expanded="false">Registros</a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/correos">Registro de Correos</a>
-                  <a class="dropdown-item" href="/cursos">Registro de Cursos</a>
-                  <a class="dropdown-item" href="/frecuencias">Registro de Frecuencias</a>
-                  <a class="dropdown-item" href="/horarios">Registro de Horarios</a>
-                  <a class="dropdown-item" href="/laboratorios">Registro de Laboratorios</a>
-                  <a class="dropdown-item" href="/perfiles">Registro de Perfiles</a>
-                  <a class="dropdown-item" href="/profesores">Registro de Profesores</a>
-                  <a class="dropdown-item" href="/programas">Registro de Programas</a>
-                  <a class="dropdown-item" href="/telefonos">Registro de Teléfonos</a>
+                    <a class="dropdown-item" href="/correos">Registro de Correos</a>
+                    <a class="dropdown-item" href="/cursos">Registro de Cursos</a>
+                    <a class="dropdown-item" href="/frecuencias">Registro de Frecuencias</a>
+                    <a class="dropdown-item" href="/horarios">Registro de Horarios</a>
+                    <a class="dropdown-item" href="/laboratorios">Registro de Laboratorios</a>
+                    <a class="dropdown-item" href="/perfiles">Registro de Perfiles</a>
+                    <a class="dropdown-item" href="/profesores">Registro de Profesores</a>
+                    <a class="dropdown-item" href="/programas">Registro de Programas</a>
+                    <a class="dropdown-item" href="/telefonos">Registro de Teléfonos</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Créditos</a>
                 </div>
@@ -61,10 +61,10 @@
           </div>
         </div>
       </nav>
-    
-      <nav class="navbar navbar-expand-lg bg-warning" data-bs-theme="dark">
+
+      <nav class="navbar navbar-expand-lg bg-info" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/correos">REGISTRO DE CURSOS</a>
+          <a class="navbar-brand" href="/laboratorios">REGISTRO DE LABORATORIOS</a>
         </div>
       </nav>
       
@@ -74,35 +74,27 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-14">
+            <div class="col-md-10">
                 <table class="table table-borbered table-hover">
                     <thead>
                         <tr>
-                            <th>IDCURSO</th>
-                            <th>IDPROGRAMA</th>
+                            <th>IDLABORATORIO</th>
                             <th>DESCRIPCION</th>
-                            <th>OBJETIVOS</th>  
-                            <th>REQUISITOS</th>
-                            <th>PRECIO</th>
-                            <th>DURACION</th>
+                            <th>LOCAL</th>  
                             <th>ESTADO</th> 
                             <th>OPCIONES</th>  
                         </tr>
                     </thead>
                     <tbody> 
-                        <% results.forEach((cursos)=> { %>                                     
+                        <% results.forEach((laboratorios)=> { %>                                     
                             <tr>
-                               <td><%= cursos.idcurso%></td>
-                               <td><%= cursos.idprograma%></td>
-                               <td><%= cursos.descripcion%></td>
-                               <td><%= cursos.objetivos%></td>
-                               <td><%= cursos.requisitos%></td>
-                               <td><%= cursos.precio%></td>
-                               <td><%= cursos.duracion%></td>
-                               <td><%= cursos.estado%></td>
+                               <td><%= laboratorios.idlaboratorio%></td>
+                               <td><%= laboratorios.descripcion%></td>
+                               <td><%= laboratorios.local%></td>
+                               <td><%= laboratorios.estado%></td>
                                <td>
-                                <a href="/editarcursos/<%= cursos.idcurso%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
-                                <a href="/deletecursos/<%= cursos.idcurso%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                                <a href="/editarlaboratorios/<%= laboratorios.idlaboratorio%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
+                                <a href="/deletelaboratorios/<%= laboratorios.idlaboratorio%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
                                </td>                          
    
                            </tr>
@@ -110,7 +102,7 @@
                     </tbody>
                  </table>
 
-                 <a href="/crearcursos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+                 <a href="/crearlaboratorios/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
                  <a href="/" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
             </div>
             

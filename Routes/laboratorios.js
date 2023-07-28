@@ -8,14 +8,13 @@ router.get('/', (req, res) => {
 
 
 //Actualizar todo lo que está debajo y dejar fijo el código anterior en TODAS las rutas
-router.get('/frecuencias', (req, res) => {
+router.get('/laboratorios', (req, res) => {
 
     conexion.query('SELECT * FROM laboratorios', (error, results) => {
         if (error) {
             throw error;
         } else {
-            //res.render('formapagoViews/formapago.ejs', {results:results});      
-            res.render('../Views/laboratoriosViews/laboratorios.ejs', { results: results });
+            res.render('../Views/laboratoriosViews/laboratorios.ejs',{results:results});
         }
     })
 })
@@ -27,7 +26,7 @@ router.get('/crearlaboratorios', (req, res) => {
 
 router.get('/deletelaboratorios/:idlaboratorio', (req, res) => {
     const idlaboratorio = req.params.idlaboratorio;
-    conexion.query('DELETE FROM laboratorios WHERE idlaboratorio= ?', [idlaboratorios], (error, results) => {
+    conexion.query('DELETE FROM laboratorios WHERE idlaboratorio= ?', [idlaboratorio], (error, results) => {
         if (error) {
             console.log(error);
         } else {
@@ -38,18 +37,18 @@ router.get('/deletelaboratorios/:idlaboratorio', (req, res) => {
 
 router.get('/editarlaboratorios/:idlaboratorio', (req, res) => {
     const idlaboratorio = req.params.idlaboratorio;
-    conexion.query('SELECT * FROM cursos WHERE idlaboratorio=?', [idlaboratorio], (error, results) => {
+    conexion.query('SELECT * FROM laboratorios WHERE idlaboratorio=?', [idlaboratorio], (error, results) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/laboratorioViews/editarlaboratorios.ejs', { laboratorios: results[0] });
+            res.render('../Views/laboratoriosViews/editarlaboratorios.ejs', { laboratorios: results[0] });
         }
     });
 });
 
 
-const correos = require('../Controllers/laboratoriosController');
+const laboratorios = require('../Controllers/laboratoriosController');
 router.post('/guardarlaboratorios', laboratorios.guardarlaboratorios);
-router.post('/actualizarlaboratorios', laboratorios.actualizalaboratorios);
+router.post('/actualizarlaboratorios', laboratorios.actualizarlaboratorios);
 
 module.exports = router;
