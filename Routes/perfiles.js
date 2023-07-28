@@ -31,7 +31,7 @@ router.get('/deleteperfiles/:idperfil', (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/perfil');
+            res.redirect('/perfiles');
         }
     })
 });
