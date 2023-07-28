@@ -9,10 +9,9 @@ exports.guardartelefonos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const telefono = req.body.telefono;
 
-    conexion.query('INSERT INTO telefonos SET ?', {
-        idtelefono: idtelefono, idprofessor: idprofesor,
-        telefono: telefono
-    }, (error, results) => {
+    conexion.query('INSERT INTO telefonos SET ?', [{ idtelefono: idtelefono, idprofessor: idprofesor,
+        telefono: telefono}], (error, results) => {
+
         if (error) {
             console.log(error);
         } else {
@@ -28,7 +27,9 @@ exports.actualizartelefonos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const telefono = req.body.telefono;
 
-    conexion.query('UPDATE telefono SET ? WHERE idtelefono =?', [{ idprofesor: idprofesor, telefono: telefono }, idtelefono], (error, results) => {
+    conexion.query('UPDATE telefono SET ? WHERE idtelefono =?', [{ idprofesor: idprofesor, telefono: telefono },
+        idtelefono], (error, results) => {
+
         if (error) {
             console.log(error);
         } else {

@@ -15,11 +15,10 @@ exports.guardarprofesores = (req, res) => {
     const genero = req.body.genero;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO profesores SET ?', {
-        idprofesor: idprofesor, appaterno: apparteno,
-        apmaterno: apmaterno, nombres: nombres, nacimiento: nacimiento,
-        direccion: direccion, referencia: referencia, genero: genero, estado: estado
-    }, (error, results) => {
+    conexion.query('INSERT INTO profesores SET ?', [{ idprofesor: idprofesor, appaterno: apparteno, 
+        apmaterno: apmaterno, nombres: nombres, nacimiento: nacimiento, direccion: direccion, 
+        referencia: referencia, genero: genero, estado: estado}], (error, results) => {
+
         if (error) {
             console.log(error);
         } else {
@@ -41,9 +40,10 @@ exports.actualizarprofesores = (req, res) => {
     const genero = req.body.genero;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE profesores SET ? WHERE idprofesor =?', [{ appaterno: apparteno,
-        apmaterno: apmaterno, nombres: nombres, nacimiento: nacimiento,
-        direccion: direccion, referencia: referencia, genero: genero, estado: estado }, idprofesor], (error, results) => {
+    conexion.query('UPDATE profesores SET ? WHERE idprofesor =?', [{ appaterno: apparteno, apmaterno: apmaterno,
+        nombres: nombres, nacimiento: nacimiento, direccion: direccion, referencia: referencia, genero: genero,
+         estado: estado }, idprofesor], (error, results) => {
+            
         if (error) {
             console.log(error);
         } else {
