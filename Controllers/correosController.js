@@ -9,10 +9,8 @@ exports.guardarcorreos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const correo = req.body.correo;
 
-    conexion.query('INSERT INTO correos SET ?', {
-        idcorreo: idcorreo, idprofessor: idprofesor,
-        correo: correo
-    }, (error, results) => {
+    conexion.query('INSERT INTO correos SET ?', [{ idcorreo: idcorreo, idprofesor: idprofesor, correo: correo}], 
+    (error, results) => {
         if (error) {
             console.log(error);
         } else {

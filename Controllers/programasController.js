@@ -14,11 +14,10 @@ exports.guardarprogramas = (req, res) => {
     const duracion = req.body.duracion;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO programas SET ?', {
-        idprograma: idprograma, titulo: titulo,
-        descripcion: descripcion, objetivos: objetivos, requisitos: requisitos,
-        precio: precio, duracion: duracion, estado: estado
-    }, (error, results) => {
+    conexion.query('INSERT INTO programas SET ?', [{ idprograma:idprograma, titulo:titulo, descripcion:descripcion,
+        objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado: estado}],
+        (error, results) => {
+
         if (error) {
             console.log(error);
         } else {
@@ -39,8 +38,10 @@ exports.actualizarprogramas = (req, res) => {
     const duracion = req.body.duracion;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE programas SET ? WHERE idprograma =?', [{ titulo: titulo, descripcion: descripcion, objetivos: objetivos, requisitos: requisitos,
-        precio: precio, duracion: duracion, estado: estado }, idprograma], (error, results) => {
+    conexion.query('UPDATE programas SET ? WHERE idprograma =?', [{ titulo: titulo, descripcion: descripcion, 
+        objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado: estado },
+         idprograma], (error, results) => {
+            
         if (error) {
             console.log(error);
         } else {

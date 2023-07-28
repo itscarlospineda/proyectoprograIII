@@ -48,7 +48,7 @@ router.get('/editartelefonos/:idtelefono', (req, res) => {
 });
 
 
-const correos = require('../Controllers/telefonoscontroller');
+const telefonos = require('../Controllers/telefonoscontroller');
 router.post('/guardartelefonos', telefonos.guardartelefonos);
 router.post('/actualizartelefonos', telefonos.actualizartelefonos);
 

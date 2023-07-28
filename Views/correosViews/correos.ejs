@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTRY.com</title>
+    <title>REGISTRO DE CORREOS</title>
     <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
@@ -62,17 +61,54 @@
           </div>
         </div>
       </nav>
+    
+      <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/correos">REGISTRO DE CORREOS</a>
+        </div>
+      </nav>
+      
+    <!--<nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand"><center>REGISTRO DE CORREOS</center></a>
+    </nav> -->
 
-      <br><br><br><br><br>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-7">
+                <table class="table table-borbered table-hover">
+                    <thead>
+                        <tr>
+                            <th>IDCORREO</th>
+                            <th>IDPROFESOR</th>
+                            <th>CORREO ELECTRONICO</th>
+                            <th>OPCIONES</th>  
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <% results.forEach((correos)=> { %>                                     
+                            <tr>
+                               <td><%= correos.idcorreo%></td>
+                               <td><%= correos.idprofesor%></td>
+                               <td><%= correos.correo%></td>
+                               <td>
+                                <a href="/editarcorreos/<%= correos.idcorreo%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
+                                <a href="/deletecorreos/<%= correos.idcorreo%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                               </td>                          
+   
+                           </tr>
+                       <% }) %>
+                    </tbody>
+                 </table>
 
-      <center><img src="/Images/LOGO.jpg" alt="Logo de USAP" width="480" height="224"></center>
-
-      <br><br>
-
-      <center> <button type="button" class="btn btn-success btn-lg">Continuar</button> </center>
-
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+                 <a href="/crearcorreos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+                 <a href="/" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
+            </div>
+            
+        </div>
+    </div>
+    
+    <p> </p>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
       crossorigin="anonymous"></script>
 </body>

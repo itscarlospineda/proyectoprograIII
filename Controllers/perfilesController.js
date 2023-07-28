@@ -10,9 +10,9 @@ exports.guardarperfiles = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO perfiles SET ?', {
-        idperfil: idperfil,idprograma: idprograma, idprofesor: idprofesor, estado: estado
-    }, (error, results) => {
+    conexion.query('INSERT INTO perfiles SET ?', [{ idperfil: idperfil,idprograma: idprograma, 
+        idprofesor: idprofesor, estado: estado}], (error, results) => {
+
         if (error) {
             console.log(error);
         } else {
@@ -29,7 +29,9 @@ exports.actualizarperfiles = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE perfiles SET ? WHERE idperfil =?', [{ idprograma: idprograma, idprofesor: idprofesor, estado: estado }, idperfil], (error, results) => {
+    conexion.query('UPDATE perfiles SET ? WHERE idperfil =?', [{ idprograma: idprograma, idprofesor: idprofesor, 
+        estado: estado }, idperfil], (error, results) => {
+            
         if (error) {
             console.log(error);
         } else {
