@@ -25,7 +25,7 @@ router.get('/crearfrecuencias', (req, res) => {
 })
 
 
-router.get('/deletecursos/:idcurso', (req, res) => {
+router.get('/deletefrecuencias/:idcurso', (req, res) => {
     const idfrecuencia = req.params.idfrecuencia;
     conexion.query('DELETE FROM frecuencias WHERE idfrecuencia= ?', [idfrecuencia], (error, results) => {
         if (error) {
@@ -38,18 +38,18 @@ router.get('/deletecursos/:idcurso', (req, res) => {
 
 router.get('/editarfrecuencias/:idfrecuencia', (req, res) => {
     const idfrecuencia = req.params.idfrecuencia;
-    conexion.query('SELECT * FROM cursos WHERE idfrecuencia=?', [idfrecuencia], (error, results) => {
+    conexion.query('SELECT * FROM frecuencias WHERE idfrecuencia=?', [idfrecuencia], (error, results) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/frecuenciaViews/editarfrecuencia.ejs', { frecuencias: results[0] });
+            res.render('../Views/frecuenciasViews/editarfrecuencias.ejs', { frecuencias: results[0] });
         }
     });
 });
 
 
-const correos = require('../Controllers/frecuenciasController');
-router.post('/guardarfrecuencias', correos.guardarfrecuencias);
-router.post('/actualizarcorreos', correos.actualizafrecuencias);
+const frecuencias = require('../Controllers/frecuenciasController');
+router.post('/guardarfrecuencias', frecuencias.guardarfrecuencias);
+router.post('/actualizafrecuencias', frecuencias.actualizafrecuencias);
 
 module.exports = router;

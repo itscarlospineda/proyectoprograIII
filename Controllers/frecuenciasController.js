@@ -30,7 +30,7 @@ exports.actualizafrecuencias = (req, res) => {
     const horafin = req.body.horafin;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE correos SET ? WHERE idfrecuencia =?', [{ descripcion: descripcion, 
+    conexion.query('UPDATE frecuencias SET ? WHERE idfrecuencia =?', [{ descripcion: descripcion, 
         horainicio: horainicio, horafin: horafin, estado: estado }, idfrecuencia], (error, results) => {
         if (error) {
             console.log(error);
