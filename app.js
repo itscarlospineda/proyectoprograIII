@@ -18,15 +18,12 @@ const port = process.env.port || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
 //Llamada de Recursos
 app.use('/Resources/Templates', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css/')));
 app.use('/Images', express.static('Resources/Images/'));
 
-
 //Importación de Rutas de Home por medio de las tablas
 app.use('/', require('./router'));
-
 
 //Inicializando el Servidor
 app.listen(port, () => {

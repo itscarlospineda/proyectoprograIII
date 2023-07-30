@@ -75,7 +75,7 @@ router.get('/home', (req, res)=>{
 // CORREOS
 router.get('/correos', (req, res) => {
 
-    conexion.query('SELECT * FROM correos', (error, results) => {
+    conexion.query('SELECT A.IDCORREO,A.IDPROFESOR,B.NOMBRES,A.CORREO FROM CORREOS A INNER JOIN PROFESORES B ON A.IDPROFESOR=B.IDPROFESOR', (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -83,6 +83,16 @@ router.get('/correos', (req, res) => {
         }
     })
 })
+
+router.get('/get_correos', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT correo FROM correos WHERE correo LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
 
 router.get('/crearcorreos', (req, res) => {
     res.render('../Views/correosViews/crearcorreos.ejs');

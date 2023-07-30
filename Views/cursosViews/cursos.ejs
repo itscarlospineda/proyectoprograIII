@@ -48,9 +48,11 @@
                   <a class="dropdown-item" href="/profesores">Registro de Profesores</a>
                   <a class="dropdown-item" href="/programas">Registro de Programas</a>
                   <a class="dropdown-item" href="/telefonos">Registro de Teléfonos</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Créditos</a>
                 </div>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
               </li>
               
             </ul>
@@ -75,6 +77,9 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-14">
+              <a href="/crearcursos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+                 <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
+                 <br><br>
                 <table class="table table-borbered table-hover">
                     <thead>
                         <tr>
@@ -109,9 +114,6 @@
                        <% }) %>
                     </tbody>
                  </table>
-
-                 <a href="/crearcursos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
-                 <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
             </div>
             
         </div>
