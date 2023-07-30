@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <title>Acceso al Sistema</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1 class="mt-5 mb-5 text-center text-primary"><b>ACCESO AL SISTEMA</b></h1>
+
+            <div class="row mt-5">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6">
+                <% if(session.user_id) { %>
+
+                    <h1>Bienvenido</h1>
+                    <a href="/logout" class="btn btn-primary">Cerrar Sesion</a>
+
+                <% } else { %>
+
+                    <div class="card">
+                        <div class="card-header">Acceso</div>
+                        <div class="card-body">
+                            <form method="post" action="/login">
+                                <div class="mb-3">
+                                    <label>Correo</label>
+                                    <input type="correo" name="correo" class="form-control" />
+                                </div>
+                                <div class="mb-3">
+                                    <label>Contraseña</label>
+                                    <input type="password" name="clave" class="form-control" id="clave" />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="checkbox" onclick="myFunction()">&nbsp Mostrar Clave
+                                </div>
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-primary" value="Ingresar" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                <% } %>
+                </div>
+            </div>
+        </div>
+        <script>
+            function myFunction() {
+              var x = document.getElementById("clave");
+              if (x.type === "password") {
+                x.type = "text";
+              } else {
+                x.type = "password";
+              }
+            }
+            </script>
+    </body>
+</html>

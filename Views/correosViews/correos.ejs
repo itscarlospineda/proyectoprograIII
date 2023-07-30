@@ -24,7 +24,7 @@
 
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Home
+                <a class="nav-link active" href="/home">Home
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
@@ -48,11 +48,12 @@
                   <a class="dropdown-item" href="/profesores">Registro de Profesores</a>
                   <a class="dropdown-item" href="/programas">Registro de Programas</a>
                   <a class="dropdown-item" href="/telefonos">Registro de Teléfonos</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Créditos</a>
                 </div>
               </li>
               
+              <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
+              </li>
             </ul>
             <form class="d-flex">
               <input class="form-control me-sm-2" type="search" placeholder="Search">
@@ -73,22 +74,34 @@
     </nav> -->
 
     <div class="container">
+      <div class="mb-3">
+        <br><br>
+        <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
+        placeholder="Digite el correo" />
+        <span id="buscar_resultado"></span>
+      </div>                  
+
         <div class="row mt-5">
             <div class="col-md-7">
+              <a href="/crearcorreos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+              <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
+              <br> <br>
                 <table class="table table-borbered table-hover">
                     <thead>
                         <tr>
-                            <th>IDCORREO</th>
-                            <th>IDPROFESOR</th>
-                            <th>CORREO ELECTRONICO</th>
-                            <th>OPCIONES</th>  
+                            <th scope="col">IDCORREO</th>
+                            <th scope="col"></th>
+                            <th scope="col">PROFESOR</th>
+                            <th scope="col">CORREO ELECTRONICO</th>
+                            <th scope="col">OPCIONES</th>  
                         </tr>
                     </thead>
                     <tbody> 
                         <% results.forEach((correos)=> { %>                                     
                             <tr>
                                <td><%= correos.idcorreo%></td>
-                               <td><%= correos.idprofesor%></td>
+                               <td style="visibility:hidden"><%= correos.idprofesor%></td>   
+                               <td><%= correos.nombres%></td>                             
                                <td><%= correos.correo%></td>
                                <td>
                                 <a href="/editarcorreos/<%= correos.idcorreo%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
@@ -98,10 +111,7 @@
                            </tr>
                        <% }) %>
                     </tbody>
-                 </table>
-
-                 <a href="/crearcorreos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
-                 <a href="/" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
+                </table>
             </div>
             
         </div>
@@ -113,3 +123,69 @@
       crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+<script>
+
+  function cargar_correos(query = '')
+  {
+      fetch('/get_correos?buscar_query='+query+'').then(function(response){
+
+          return response.json();
+
+      }).then(function(responseData){
+
+          var html = '<ul class="list-group">';
+
+          if(responseData.length > 0)
+          {
+              for(var count = 0; count < responseData.length; count++)
+              {
+                  var regular_expression = new RegExp('('+query+')', 'gi');
+
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'
+                    +responseData[count].correo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+              }
+          }
+          else
+          {
+              html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+          }
+
+          html += '</ul>';
+
+          document.getElementById('buscar_resultado').innerHTML = html;
+
+      });
+  }
+
+  var buscar_elemento = document.getElementById("autocompleta_busqueda");
+
+  buscar_elemento.onkeyup = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_correos(query);
+
+  };
+
+  buscar_elemento.onfocus = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_correos(query);
+
+  };
+
+  function cargar_texto(event)
+  {
+      var correo = event.textContent;
+
+      console.log(correo);
+
+      document.getElementById('autocompleta_busqueda').value = correo;
+
+      document.getElementById('buscar_resultado').innerHTML = '';
+  }
+
+</script>
