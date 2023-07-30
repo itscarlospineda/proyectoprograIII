@@ -75,7 +75,8 @@ router.get('/home', (req, res)=>{
 // CORREOS
 router.get('/correos', (req, res) => {
 
-    conexion.query('SELECT A.IDCORREO,A.IDPROFESOR,B.NOMBRES,A.CORREO FROM CORREOS A INNER JOIN PROFESORES B ON A.IDPROFESOR=B.IDPROFESOR', (error, results) => {
+    conexion.query('select a.idcorreo,a.idprofesor,b.nombres,a.correo from correos a inner join profesores b on a.idprofesor=b.idprofesor;',
+     (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -94,8 +95,14 @@ router.get('/get_correos', function(request, response, next){
 });
 
 
-router.get('/crearcorreos', (req, res) => {
-    res.render('../Views/correosViews/crearcorreos.ejs');
+router.get('/crearcorreos', (req, res)=>{     
+    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',(error, data)=>{  //Query de Mysql.
+        if(error){
+            throw error;
+        } else {                       
+            res.render('../views/correosViews/crearcorreos', {data:data});  // Archivo a renderizar            
+        }   
+    })          
 })
 
 

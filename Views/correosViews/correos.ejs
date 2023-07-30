@@ -100,8 +100,8 @@
                         <% results.forEach((correos)=> { %>                                     
                             <tr>
                                <td><%= correos.idcorreo%></td>
-                               <td style="visibility:hidden"><%= correos.idprofesor%></td>   
-                               <td><%= correos.nombres%></td>                             
+                               <td style="visibility: hidden;"><%= correos.idprofesor%></td>
+                               <td><%= correos.nombres%></td>                                                    
                                <td><%= correos.correo%></td>
                                <td>
                                 <a href="/editarcorreos/<%= correos.idcorreo%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>

@@ -5,11 +5,11 @@ const conexion = require('../database');
 //<GUARDAR un REGISTRO
 
 exports.guardarcorreos = (req, res) => {
-    const idcorreo = req.body.idcorreo;
+    //const idcorreo = req.body.idcorreo;
     const idprofesor = req.body.idprofesor;
     const correo = req.body.correo;
 
-    conexion.query('INSERT INTO correos SET ?', [{ idcorreo: idcorreo, idprofesor: idprofesor, correo: correo}], 
+    conexion.query('INSERT INTO correos SET ?', [{idprofesor: idprofesor, correo: correo}], 
     (error, results) => {
         if (error) {
             console.log(error);
