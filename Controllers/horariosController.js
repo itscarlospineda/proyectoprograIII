@@ -36,9 +36,9 @@ exports.guardarhorarios = (req, res) => {
     const fechafin = req.body.fechafin;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE horarios SET ? WHERE idhorario =?', [{ idperfil: idperfil,
+    conexion.query('UPDATE horarios SET ? WHERE idhorario=?', [{ idperfil: idperfil,
         idlaboratorio: idlaboratorio, idfrecuencia: idfrecuencia, fechainicio: fechainicio, fechafin: fechafin, 
-        estado:estado }, idhorario], (error, results) => {
+        estado:estado}, idhorario], (error, results) => {
         if (error) {
             console.log(error);
         } else {

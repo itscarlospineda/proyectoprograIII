@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRO DE CORREOS</title>
+    <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">REGISTRY</a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" 
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="/home">Home
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" 
+                aria-haspopup="true" aria-expanded="false">Registros</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/correos">Registro de Correos</a>
+                  <a class="dropdown-item" href="/cursos">Registro de Cursos</a>
+                  <a class="dropdown-item" href="/frecuencias">Registro de Frecuencias</a>
+                  <a class="dropdown-item" href="/horarios">Registro de Horarios</a>
+                  <a class="dropdown-item" href="/laboratorios">Registro de Laboratorios</a>
+                  <a class="dropdown-item" href="/perfiles">Registro de Perfiles</a>
+                  <a class="dropdown-item" href="/profesores">Registro de Profesores</a>
+                  <a class="dropdown-item" href="/programas">Registro de Programas</a>
+                  <a class="dropdown-item" href="/telefonos">Registro de Teléfonos</a>
+                </div>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    
+      <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/perfiles">REGISTRO DE PERFILES</a>
+        </div>
+      </nav>
+      
+    <!--<nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand"><center>REGISTRO DE CORREOS</center></a>
+    </nav> -->
+
+    <div class="container">
+      <div class="mb-3">
+        <br><br>
+        <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
+        placeholder="Ingrese el Perfil" />
+        <span id="buscar_resultado"></span>
+      </div>                  
+
+        <div class="row mt-5">
+            <div class="col-md-7">
+              <a href="/crearperfiles/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+              <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
+              <br> <br>
+                <table class="table table-borbered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID PERFIL </th>
+                            <th scope="col"></th>
+                            <th scope="col">ID PROGRAMA</th>
+                            <th scope="col">ID PROFESOR</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">OPCIONES</th>  
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <% results.forEach((perfiles)=> { %>                                     
+                            <tr>
+                               <td><%= perfiles.idperfil%></td>
+                               <td style="visibility:hidden"><%= perfiles.idprograma%></td>   
+                               <td><%= perfiles.idprograma%></td> 
+                               <td><%= perfiles.idprofesor%></td>                             
+                               <td><%= perfiles.estado%></td>
+                               <td>
+                                <a href="/editarperfiles/<%= perfiles.idperfil%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
+                                <a href="/deleteperfiles/<%= perfiles.idperfil%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                               </td>                          
+   
+                           </tr>
+                       <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    
+    <p> </p>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+      crossorigin="anonymous"></script>
+</body>
+</html>

@@ -243,7 +243,7 @@ router.get('/crearhorarios', (req, res) => {
 
 
 router.get('/deletehorarios/:idhorario', (req, res) => {
-    const idcorreo = req.params.idcorreo;
+    const idhorario = req.params.idhorario;
     conexion.query('DELETE FROM horarios WHERE idhorario= ?', [idhorario], (error, results) => {
         if (error) {
             console.log(error);
@@ -254,7 +254,7 @@ router.get('/deletehorarios/:idhorario', (req, res) => {
 });
 
 router.get('/editarhorarios/:idhorario', (req, res) => {
-    const idcorreo = req.params.idcorreo;
+    const idhorario = req.params.idhorario;
     conexion.query('SELECT * FROM horarios WHERE idhorario=?', [idhorario], (error, results) => {
         if (error) {
             throw error;
@@ -344,7 +344,7 @@ router.get('/deleteperfiles/:idperfil', (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/perfil');
+            res.redirect('/perfiles');
         }
     })
 });
