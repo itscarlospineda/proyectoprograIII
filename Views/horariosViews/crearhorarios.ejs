@@ -20,7 +20,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="navbar-brand" href="#">ADICIONR UN HORARIO</a>
+                <a class="navbar-brand" href="#">ADICION DE HORARIO</a>
               </li>                               
             </ul>            
           </div>
@@ -32,23 +32,28 @@
                 <div class="card-body">
                     <form action="/guardarhorarios" method="POST">
 
+                        <div class="form-group">
+                            <label for="idprograma">ID Perfil</label>
+                            <select class="form-control" id="idprograma" name="idprograma">
+                            <option value="">Seleccionar Perfil</option>
+                            <% if(data.length){
+                            for(var i = 0; i< data.length; i++) {%> 
+                            <option value="<%= data[i].idprograma%>">
+                            <%= data[i].titulo%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div>  
+        
+
                         <div class="mb-3">
-                            <label for="idhorario" class="form-label">Código de Horario</label>
-                            <input type="text" class="form-control" id="idhorario" name="idhorario" tabindex="1">
-                        </div>   
-                        <div class="mb-3">
-                            <label for="idperfil" class="form-label">ID Perfil</label>
-                            <input type="text" class="form-control" id="idperfil" name="idperfil" tabindex="1">
+                            <label for="idlaboratorio" class="form-label">ID Laboratorio</label>
+                            <input type="text" class="form-control" id="idlaboratorio" name="idlaboratorio" tabindex="1">
                         </div>
 
                         <div class="mb-3">
                             <label for="idfrecuencia" class="form-label">ID Frecuencia</label>
                             <input type="text" class="form-control" id="idfrecuencia" name="idfrecuencia" tabindex="1">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fechainicio" class="form-label">Fecha de Inicio</label>
-                            <input type="text" class="form-control" id="fechainicio" name="fechainicio" tabindex="1">
                         </div>
 
                         <div class="mb-3">

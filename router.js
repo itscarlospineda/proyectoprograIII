@@ -235,7 +235,8 @@ router.post('/actualizafrecuencias', frecuencias.actualizafrecuencias);
 //      HORARIOS
 router.get('/horarios', (req, res) => {
 
-    conexion.query('SELECT * FROM horarios', (error, results) => {
+    conexion.query('select a.idhorario,a.idperfil,d.idprograma,e.titulo,d.idprofesor,f.nombres,f.appaterno,a.idlaboratorio,b.descripcion,a.idfrecuencia,c.modalidad,a.fechainicio,a.fechafin,a.estado from horarios a inner join laboratorios b on a.idlaboratorio=b.idlaboratorio inner join frecuencias c on a.idfrecuencia=c.idfrecuencia inner join perfiles d on a.idperfil=d.idperfil inner join programas e on d.idprograma=e.idprograma inner join profesores f on d.idprofesor=f.idprofesor;',
+     (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -244,9 +245,25 @@ router.get('/horarios', (req, res) => {
     })
 })
 
-router.get('/crearhorarios', (req, res) => {
-    res.render('../Views/horariosViews/crearhorarios.ejs');
+router.get('/get_horarios', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT titulo FROM programas WHERE titulo LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
+router.get('/crearhorarios', (req, res)=>{     
+    conexion.query('SELECT idprograma,titulo FROM programas ORDER BY idprograma desc',(error, data)=>{  //Query de Mysql.
+        if(error){
+            throw error;
+        } else {                       
+            res.render('../views/horariosViews/crearhorarios', {data:data});  // Archivo a renderizar            
+        }   
+    })          
 })
+
 
 
 router.get('/deletehorarios/:idhorario', (req, res) => {

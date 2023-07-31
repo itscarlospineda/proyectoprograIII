@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>ACTUALIZAR CURSOS</title>
+    <title>ACTUALIZAR CURSOS</title> <!--CAMBIAR NOMBRE-->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,24 +19,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="navbar-brand" href="#">ACTUALIZAR CURSOS</a>
+                <a class="navbar-brand" href="#">ACTUALIZAR CURSOS</a> <!--CAMBIAR NOMBRE-->
               </li>                            
             </ul>            
           </div>
         </div>
       </nav>
-      <% if (cursos) { %>
+      <% if (cursos) { %> <!--nombre de tablas-->
       <div class="container mt-4">          
           <div class="card border-secondary">  
-                <div class="card-header">Actualización de Cursos</div>
+                <div class="card-header">Actualización de Cursos</div> <!--CAMBIAR NOMBRE-->
                 <div class="card-body">
-                    <form action="/actualizarcursos" method="POST">
-                         <input idcursos="idcurso" name="idcurso" value="<%= cursos.idcurso %>" hidden>
+                    <form action="/actualizarcursos" method="POST"> <!--/actualizarprofesores-->
+                         <input idcurso="idcurso" name="idcurso" value="<%= cursos.idcurso %>" hidden> <!--llave principal-->
 
                         <div class="mb-3">
                             <label for="idprograma" class="form-label">Código de Programa</label>
                             <input type="text" class="form-control" id="idprograma" name="idprograma" 
-                            tabindex="1" value="<%= cursos.idprograma  %>">
+                            tabindex="1" value="<%= cursos.idprograma  %>"> <!--tabla.nombrecampo= profesores.appaterno-->
                         </div> 
 
                         <div class="mb-3">
@@ -72,11 +72,11 @@
                         <div class="mb-3">
                             <label for="estado" class="form-label">Estado de Actividad</label>
                             <input type="text" class="form-control" id="estado" name="estado" 
-                            tabindex="1" value="<%= cursos.estado  %>">
+                            tabindex="1" value="<%= cursos.estado  %>"> <!--profesores.estado-->
                         </div>        
                                                                                        
                         <button type="submit" class="btn btn-primary" tabindex="5">Actualizar</button>
-                        <a href="/cursos" class="btn btn-danger">Cancelar</a>
+                        <a href="/cursos" class="btn btn-danger">Cancelar</a> <!--/profesores-->
 
                     </form>      
                 </div>

@@ -93,11 +93,17 @@
                         <tr>
                             <th scope="col">IDHORARIO</th>
                             <th scope="col"></th>
-                            <th scope="col">IDPERFIL</th>
-                            <th scope="col">IDLABORATORIO</th>
-                            <th scope="col">IDFRECUENCIA</th>
-                            <th scope="col">FECHAINICIO</th>
-                            <th scope="col">FECHAFIN</th>
+                            <th scope="col"></th>
+                            <th scope="col">TITULO</th>
+                            <th scope="col"></th>
+                            <th scope="col">NOMBRES</th>
+                            <th scope="col">APELLIDO</th>
+                            <th scope="col"></th>
+                            <th scope="col">LABORATORIO</th>
+                            <th scope="col"></th>
+                            <th scope="col">MODALIDAD</th>
+                            <th scope="col">FECHA INICIAL</th>
+                            <th scope="col">FECHA FINAL</th>
                             <th scope="col">ESTADO</th>
                             <th scope="col">OPCIONES</th>  
                         </tr>
@@ -107,9 +113,15 @@
                             <tr>
                                 <td><%= horarios.idhorario%></td>
                                 <td style="visibility:hidden"><%= horarios.idprofesor%></td>
-                                <td><%= horarios.idperfil%></td>
-                                <td><%= horarios.idlaboratorio%></td>
-                                <td><%= horarios.idfrecuencia%></td>
+                                <td style="visibility:hidden"><%= horarios.idperfil%></td>
+                                <td><%= horarios.titulo%></td>
+                                <td style="visibility:hidden"><%= horarios.idprofesor%></td>
+                                <td><%= horarios.nombres%></td>
+                                <td><%= horarios.appaterno%></td>
+                                <td style="visibility:hidden"><%= horarios.idlaboratorio%></td>
+                                <td><%= horarios.descripcion%></td>
+                                <td style="visibility:hidden"><%= horarios.idfrecuencia%></td>
+                                <td><%= horarios.modalidad%></td>
                                 <td><%= horarios.fechainicio%></td>
                                 <td><%= horarios.fechafin%></td>
                                 <td><%= horarios.estado%></td>
@@ -133,3 +145,68 @@
 </body>
 
 </html>
+
+<script>
+
+    function cargar_horarios(query = '')
+    {
+        fetch('/get_horarios?buscar_query='+query+'').then(function(response){
+  
+            return response.json();
+  
+        }).then(function(responseData){
+  
+            var html = '<ul class="list-group">';
+  
+            if(responseData.length > 0)
+            {
+                for(var count = 0; count < responseData.length; count++)
+                {
+                    var regular_expression = new RegExp('('+query+')', 'gi');
+  
+                    html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].titulo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+                }
+            }
+            else
+            {
+                html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+            }
+  
+            html += '</ul>';
+  
+            document.getElementById('buscar_resultado').innerHTML = html;
+  
+        });
+    }
+  
+    var buscar_elemento = document.getElementById("autocompleta_busqueda");
+  
+    buscar_elemento.onkeyup = function(){
+  
+        var query = buscar_elemento.value;
+  
+        cargar_horarios(query);
+  
+    };
+  
+    buscar_elemento.onfocus = function(){
+  
+        var query = buscar_elemento.value;
+  
+        cargar_horarios(query);
+  
+    };
+  
+    function cargar_texto(event)
+    {
+        var horarios = event.textContent;
+  
+        console.log(horarios);
+  
+        document.getElementById('autocompleta_busqueda').value = horarios;
+  
+        document.getElementById('buscar_resultado').innerHTML = '';
+    }
+  
+  </script>
+  
