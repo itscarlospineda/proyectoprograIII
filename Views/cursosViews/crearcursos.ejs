@@ -32,15 +32,18 @@
                 <div class="card-body">
                     <form action="/guardarcursos" method="POST"> <!--/guardarprofesores-->
 
-                        <div class="mb-3">
-                            <label for="idcurso" class="form-label">Código de Curso</label>
-                            <input type="text" class="form-control" id="idcurso" name="idcurso" tabindex="1">
-                        </div>   
-
-                        <div class="mb-3">
+                        <div class="form-group">
                             <label for="idprograma" class="form-label">Código de Programa</label>
-                            <input type="text" class="form-control" id="idprograma" name="idprograma" tabindex="1">
-                        </div>
+                            <select class="form-control" id="idprograma" name="idprograma">
+                            <option value="">Seleccionar Programa</option>
+                            <% if(data.length){
+                            for(var i = 0; i< data.length; i++){%> 
+                            <option value="<%= data[i].idprograma%>">
+                            <%= data[i].titulo%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div>  <br>
 
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción del Curso</label>

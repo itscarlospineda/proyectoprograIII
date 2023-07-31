@@ -5,7 +5,7 @@ const conexion = require('../database');
 //GUARDAR un REGISTRO
 
 exports.guardarcursos = (req, res) => {
-    const idcurso = req.body.idcurso;
+    //const idcurso = req.body.idcurso;
     const idprograma = req.body.idprograma;
     const descripcion = req.body.descripcion;
     const objetivos = req.body.objetivos;
@@ -16,7 +16,7 @@ exports.guardarcursos = (req, res) => {
 
 
 
-    conexion.query('INSERT INTO cursos SET?', [{ idcurso: idcurso, idprograma: idprograma, 
+    conexion.query('INSERT INTO cursos SET?', [{ idprograma: idprograma, 
         descripcion: descripcion, objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion,
          estado: estado}] , (error, results) => {
         if (error) {
@@ -38,7 +38,7 @@ exports.actualizarcursos = (req, res) => {
     const duracion = req.body.duracion;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE cursos SET ? WHERE idcurso=?', [{ idprograma: idprograma, descripcion: descripcion,
+    conexion.query('UPDATE cursos SET ? WHERE idcurso=?', [{idprograma:idprograma,  descripcion: descripcion,
         objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado:estado}, idcurso],
          (error, results) => {
         if (error) {

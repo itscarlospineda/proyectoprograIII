@@ -29,9 +29,7 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
                     </li>
@@ -56,15 +54,12 @@
                         <a class="nav-link" href="/">Logout</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                
             </div>
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/horarios">REGISTRO DE HORARIOS</a>
         </div>
@@ -75,15 +70,16 @@
     </nav> -->
 
     <div class="container">
-        <div class="mb-3">
-            <br><br>
-            <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg"
-                placeholder="Digite el horario" />
-            <span id="buscar_resultado"></span>
-        </div>
+        
 
         <div class="row mt-5">
             <div class="col-md-7">
+                <div class="mb-3">
+            
+                    <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg"
+                        placeholder="Digite el título del programa" />
+                    <span id="buscar_resultado"></span>
+                </div>
                 <a href="/crearhorarios/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo
                     Registro</a>
                 <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>

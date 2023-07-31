@@ -5,12 +5,12 @@ const conexion = require('../database');
 //GUARDAR un REGISTRO
 
 exports.guardarperfiles = (req, res) => {
-    const idperfil = req.body.idperfil;
+    //const idperfil = req.body.idperfil;
     const idprograma = req.body.idprograma;
     const idprofesor = req.body.idprofesor;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO perfiles SET ?', [{ idperfil: idperfil,idprograma: idprograma, 
+    conexion.query('INSERT INTO perfiles SET ?', [{ idprograma: idprograma, 
         idprofesor: idprofesor, estado: estado}], (error, results) => {
 
         if (error) {

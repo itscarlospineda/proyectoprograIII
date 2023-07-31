@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const conexion = require('./database');
+const conexion2 = require('./database');
 
 
 ////   ACCESO AL SISTEMA/////
@@ -140,7 +141,9 @@ router.post('/actualizarcorreos', correos.actualizarcorreos);
 //      CURSOS
 router.get('/cursos', (req, res) => {
 
-    conexion.query('SELECT * FROM cursos', (error, results) => {
+    conexion.query('select a.idcurso,a.idprograma,b.titulo,a.descripcion,a.objetivos,a.requisitos,a.precio,a.duracion,a.estado from cursos a inner join programas b on a.idprograma=b.idprograma',
+     (error, results) => {
+
         if (error) {
             throw error;
         } else {     
@@ -149,9 +152,29 @@ router.get('/cursos', (req, res) => {
     })
 })
 
-router.get('/crearcursos', (req, res) => {
-    res.render('../Views/cursosViews/crearcursos.ejs');
+router.get('/get_cursos', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `
+    SELECT descripcion FROM cursos 
+    WHERE descripcion LIKE '%${buscar_query}%' 
+    LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
+
+router.get('/crearcursos', (req, res)=>{     
+        conexion.query('SELECT idprograma,titulo FROM programas ORDER BY idprograma asc',(error, data)=>{  //Query de Mysql.
+            if(error){
+                throw error;
+            } else {                       
+                res.render('../views/cursosViews/crearcursos', {data:data});  // Archivo a renderizar            
+            }   
+        })          
 })
+
 
 
 router.get('/deletecursos/:idcurso', (req, res) => {
@@ -188,7 +211,7 @@ router.post('/actualizarcursos', cursos.actualizarcursos);
 //          FRECUENCIAS
 router.get('/frecuencias', (req, res) => {
 
-    conexion.query('SELECT * FROM frecuencias', (error, results) => {
+    conexion.query('SELECT idfrecuencia,modalidad,horainicio,horafin,estado FROM frecuencias', (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -196,6 +219,18 @@ router.get('/frecuencias', (req, res) => {
         }
     })
 })
+
+router.get('/get_frecuencias', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `
+    SELECT modalidad FROM frecuencias 
+    WHERE modalidad LIKE '%${buscar_query}%' 
+    LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
 
 router.get('/crearfrecuencias', (req, res) => {
     res.render('../Views/frecuenciasViews/crearfrecuencias.ejs');
@@ -254,14 +289,17 @@ router.get('/get_horarios', function(request, response, next){
     });    
 });
 
-router.get('/crearhorarios', (req, res)=>{     
-    conexion.query('SELECT idprograma,titulo FROM programas ORDER BY idprograma desc',(error, data)=>{  //Query de Mysql.
+router.get('/crearhorarios', (req, res)=>{    
+
+    conexion.query(`SELECT idprograma,titulo FROM programas ORDER BY idprograma asc`,
+    (error, data)=>{  //Query de Mysql
+
         if(error){
             throw error;
         } else {                       
             res.render('../views/horariosViews/crearhorarios', {data:data});  // Archivo a renderizar            
         }   
-    })          
+    })               
 })
 
 

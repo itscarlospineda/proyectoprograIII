@@ -5,12 +5,12 @@ const conexion = require('../database');
 //<GUARDAR un REGISTRO
 
 exports.guardarlaboratorios = (req, res) => {
-    const idlaboratorio = req.body.idlaboratorio;
+    //const idlaboratorio = req.body.idlaboratorio;
     const descripcion = req.body.descripcion;
     const local = req.body.local
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO laboratorios SET ?', [{ idlaboratorio: idlaboratorio, descripcion: descripcion,
+    conexion.query('INSERT INTO laboratorios SET ?', [{descripcion: descripcion,
         local: local, estado:estado}], (error, results) => {
 
         if (error) {

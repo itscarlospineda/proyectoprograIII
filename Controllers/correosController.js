@@ -26,7 +26,8 @@ exports.actualizarcorreos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const correo = req.body.correo;
 
-    conexion.query('UPDATE correos SET ? WHERE idcorreo =?', [{ idprofesor: idprofesor, correo: correo }, idcorreo], (error, results) => {
+    conexion.query('UPDATE correos SET ? WHERE idcorreo =?', [{ correo: correo }, idcorreo], 
+    (error, results) => {
         if (error) {
             console.log(error);
         } else {

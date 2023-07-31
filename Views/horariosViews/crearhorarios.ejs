@@ -33,23 +33,31 @@
                     <form action="/guardarhorarios" method="POST">
 
                         <div class="form-group">
-                            <label for="idprograma">ID Perfil</label>
+                            <label for="idprograma" class="form-label">Código de Perfil</label>
                             <select class="form-control" id="idprograma" name="idprograma">
                             <option value="">Seleccionar Perfil</option>
                             <% if(data.length){
-                            for(var i = 0; i< data.length; i++) {%> 
+                            for(var i = 0; i< data.length; i++){%> 
                             <option value="<%= data[i].idprograma%>">
                             <%= data[i].titulo%>
                             </option>
                             <% } } %>
                             </select>
-                        </div>  
-        
+                        </div>  <br>
 
-                        <div class="mb-3">
-                            <label for="idlaboratorio" class="form-label">ID Laboratorio</label>
-                            <input type="text" class="form-control" id="idlaboratorio" name="idlaboratorio" tabindex="1">
-                        </div>
+                        <div class="form-group">
+                            <label for="idlaboratorio" class="form-label">Código de Laboratorio</label>
+                            <select class="form-control" id="idlaboratorio" name="idlaboratorio">
+                            <option value="">Seleccionar Laboratorio</option>
+                            <% if(data.length){
+                            for(var i = 0; i< data.length; i++) {%> 
+                            <option value="<%= data[i].idlaboratorio%>">
+                            <%= data[i].descripcion%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div> <br>
+
 
                         <div class="mb-3">
                             <label for="idfrecuencia" class="form-label">ID Frecuencia</label>

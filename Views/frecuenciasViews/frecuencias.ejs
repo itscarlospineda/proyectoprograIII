@@ -28,9 +28,7 @@
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="#">About Us</a>
               </li>
@@ -55,10 +53,7 @@
                 <a class="nav-link" href="/">Logout</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-sm-2" type="search" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
@@ -76,6 +71,11 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-14">
+              <div class="mb-3">
+                <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" placeholder="Digite la modalidad" />
+                <span id="buscar_resultado"></span>
+                </div>                  
+
               <a href="/crearfrecuencias/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
                  <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
                  <br> <br>
@@ -83,7 +83,7 @@
                     <thead>
                         <tr>
                             <th>IDFRECUENCIA</th>
-                            <th>DESCRIPCION</th>
+                            <th>MODALIDAD</th>
                             <th>HORA DE INICIO</th>  
                             <th>HORA DE FINAL</th>
                             <th>ESTADO</th> 
@@ -94,7 +94,7 @@
                         <% results.forEach((frecuencias)=> { %>                                     
                             <tr>
                                <td><%= frecuencias.idfrecuencia%></td>
-                               <td><%= frecuencias.descripcion%></td>
+                               <td><%= frecuencias.modalidad%></td>
                                <td><%= frecuencias.horainicio%></td>
                                <td><%= frecuencias.horafin%></td>
                                <td><%= frecuencias.estado%></td>
@@ -120,3 +120,67 @@
       crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+
+  function cargar_frecuencias(query = '')
+  {
+      fetch('/get_frecuencias?buscar_query='+query+'').then(function(response){
+
+          return response.json();
+
+      }).then(function(responseData){
+
+          var html = '<ul class="list-group">';
+
+          if(responseData.length > 0)
+          {
+              for(var count = 0; count < responseData.length; count++)
+              {
+                  var regular_expression = new RegExp('('+query+')', 'gi');
+
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].modalidad.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+              }
+          }
+          else
+          {
+              html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+          }
+
+          html += '</ul>';
+
+          document.getElementById('buscar_resultado').innerHTML = html;
+
+      });
+  }
+
+  var buscar_elemento = document.getElementById("autocompleta_busqueda");
+
+  buscar_elemento.onkeyup = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_frecuencias(query);
+
+  };
+
+  buscar_elemento.onfocus = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_frecuencias(query);
+
+  };
+
+  function cargar_texto(event)
+  {
+      var frecuencia = event.textContent;
+
+      console.log(frecuencia);
+
+      document.getElementById('autocompleta_busqueda').value = frecuencia;
+
+      document.getElementById('buscar_resultado').innerHTML = '';
+  }
+
+</script>

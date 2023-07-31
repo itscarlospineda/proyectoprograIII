@@ -28,9 +28,7 @@
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="#">About Us</a>
               </li>
@@ -56,17 +54,14 @@
               </li>
               
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-sm-2" type="search" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
     
       <nav class="navbar navbar-expand-lg bg-warning" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/correos">REGISTRO DE CURSOS</a> <!--CAMBIAR NOMBRE-->
+          <a class="navbar-brand" href="/cursos">REGISTRO DE CURSOS</a> <!--CAMBIAR NOMBRE-->
         </div>
       </nav>
       
@@ -77,6 +72,12 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-14">
+              <div class="mb-3">
+                
+                <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" placeholder="Digite el curso" />
+                <span id="buscar_resultado"></span>
+                </div>                  
+
  <!-- CAMBIAR RUTA--><a href="/crearcursos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
                  <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
                  <br><br>
@@ -84,7 +85,8 @@
                     <thead>
                         <tr>
                             <th>IDCURSO</th>
-                            <th>IDPROGRAMA</th>
+                            <th></th>
+                            <th>PROGRAMA</th>
                             <th>DESCRIPCION</th>
                             <th>OBJETIVOS</th>  
                             <th>REQUISITOS</th>
@@ -98,7 +100,8 @@
                         <% results.forEach((cursos)=> { %>                                     
                             <tr>
                                <td><%= cursos.idcurso%></td>
-                               <td><%= cursos.idprograma%></td>
+                               <td style="visibility: hidden;"><%= cursos.idprograma%></td>
+                               <td><%= cursos.titulo%></td>
                                <td><%= cursos.descripcion%></td>
                                <td><%= cursos.objetivos%></td>
                                <td><%= cursos.requisitos%></td>
@@ -106,7 +109,7 @@
                                <td><%= cursos.duracion%></td>
                                <td><%= cursos.estado%></td>
                                <td>
-                                <a href="/editarcursos/<%= cursos.idcurso%%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
+                                <a href="/editarcursos/<%= cursos.idcurso%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
                                 <a href="/deletecursos/<%= cursos.idcurso%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
                                </td>                          
    
@@ -125,3 +128,67 @@
       crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+
+  function cargar_cursos(query = '')
+  {
+      fetch('/get_cursos?buscar_query='+query+'').then(function(response){
+
+          return response.json();
+
+      }).then(function(responseData){
+
+          var html = '<ul class="list-group">';
+
+          if(responseData.length > 0)
+          {
+              for(var count = 0; count < responseData.length; count++)
+              {
+                  var regular_expression = new RegExp('('+query+')', 'gi');
+
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].descripcion.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+              }
+          }
+          else
+          {
+              html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+          }
+
+          html += '</ul>';
+
+          document.getElementById('buscar_resultado').innerHTML = html;
+
+      });
+  }
+
+  var buscar_elemento = document.getElementById("autocompleta_busqueda");
+
+  buscar_elemento.onkeyup = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_cursos(query);
+
+  };
+
+  buscar_elemento.onfocus = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_cursos(query);
+
+  };
+
+  function cargar_texto(event)
+  {
+      var curso = event.textContent;
+
+      console.log(curso);
+
+      document.getElementById('autocompleta_busqueda').value = curso;
+
+      document.getElementById('buscar_resultado').innerHTML = '';
+  }
+
+</script>
