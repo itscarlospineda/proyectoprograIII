@@ -71,6 +71,14 @@
 
     <div class="container">
         <div class="row mt-5">
+          <div class="col-md-7">
+              
+  
+          <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
+          placeholder="Ingrese la Descripcion" />
+          <span id="buscar_resultado"></span>
+        </div>                  
+        <div class="row mt-5">
             <div class="col-md-10">
               <a href="/crearlaboratorios/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
                  <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a>
@@ -113,3 +121,67 @@
       crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+
+  function cargar_laboratorios(query = '')
+  {
+      fetch('/get_laboratorios?buscar_query='+query+'').then(function(response){
+
+          return response.json();
+
+      }).then(function(responseData){
+
+          var html = '<ul class="list-group">';
+
+          if(responseData.length > 0)
+          {
+              for(var count = 0; count < responseData.length; count++)
+              {
+                  var regular_expression = new RegExp('('+query+')', 'gi');
+
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].descripcion.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+              }
+          }
+          else
+          {
+              html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+          }
+
+          html += '</ul>';
+
+          document.getElementById('buscar_resultado').innerHTML = html;
+
+      });
+  }
+
+  var buscar_elemento = document.getElementById("autocompleta_busqueda");
+
+  buscar_elemento.onkeyup = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_laboratorios(query);
+
+  };
+
+  buscar_elemento.onfocus = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_laboratorios(query);
+
+  };
+
+  function cargar_texto(event)
+  {
+      var laboratorios = event.textContent;
+
+      console.log(laboratorios);
+
+      document.getElementById('autocompleta_busqueda').value = laboratorios;
+
+      document.getElementById('buscar_resultado').innerHTML = '';
+  }
+
+</script>

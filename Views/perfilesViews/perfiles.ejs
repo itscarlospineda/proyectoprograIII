@@ -69,7 +69,11 @@
     </nav> -->
 
     <div class="container">
-      <div class="mb-3">
+
+      <div class="row mt-5">
+        <div class="col-md-7">
+            
+
         <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
         placeholder="Ingrese el título del programa" />
         <span id="buscar_resultado"></span>
@@ -85,8 +89,9 @@
                         <tr>
                             <th scope="col">ID PERFIL </th>
                             <th scope="col"></th>
-                            <th scope="col">ID PROGRAMA</th>
-                            <th scope="col">ID PROFESOR</th>
+                            <th scope="col">TITULO</th>
+                            <th scope="col"></th>                                             
+                            <th scope="col">NOMBRES</th>
                             <th scope="col">ESTADO</th>
                             <th scope="col">OPCIONES</th>  
                         </tr>
@@ -95,9 +100,10 @@
                         <% results.forEach((perfiles)=> { %>                                     
                             <tr>
                                <td><%= perfiles.idperfil%></td>
-                               <td style="visibility:hidden"><%= perfiles.idprograma%></td>   
-                               <td><%= perfiles.idprograma%></td> 
-                               <td><%= perfiles.idprofesor%></td>                             
+                               <td style="visibility:hidden"><%= perfiles.idprograma%></td>  
+                               <td><%= perfiles.titulo%></td>
+                               <td style="visibility:hidden"><%= perfiles.idprofesor%></td> 
+                               <td><%= perfiles.nombres%></td>                           
                                <td><%= perfiles.estado%></td>
                                <td>
                                 <a href="/editarperfiles/<%= perfiles.idperfil%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
@@ -119,3 +125,67 @@
       crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+
+  function cargar_perfiles(query = '')
+  {
+      fetch('/get_perfiles?buscar_query='+query+'').then(function(response){
+
+          return response.json();
+
+      }).then(function(responseData){
+
+          var html = '<ul class="list-group">';
+
+          if(responseData.length > 0)
+          {
+              for(var count = 0; count < responseData.length; count++)
+              {
+                  var regular_expression = new RegExp('('+query+')', 'gi');
+
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].titulo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+              }
+          }
+          else
+          {
+              html += '<a href="#" class="list-group-item list-group-item-action disabled">Registro No Encontrado</a>';
+          }
+
+          html += '</ul>';
+
+          document.getElementById('buscar_resultado').innerHTML = html;
+
+      });
+  }
+
+  var buscar_elemento = document.getElementById("autocompleta_busqueda");
+
+  buscar_elemento.onkeyup = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_perfiles(query);
+
+  };
+
+  buscar_elemento.onfocus = function(){
+
+      var query = buscar_elemento.value;
+
+      cargar_perfiles(query);
+
+  };
+
+  function cargar_texto(event)
+  {
+      var perfiles = event.textContent;
+
+      console.log(horarios);
+
+      document.getElementById('autocompleta_busqueda').value = perfiles;
+
+      document.getElementById('buscar_resultado').innerHTML = '';
+  }
+
+</script>

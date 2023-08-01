@@ -346,6 +346,15 @@ router.get('/laboratorios', (req, res) => {
         }
     })
 })
+router.get('/get_laboratorios', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT descripcion FROM laboratorios WHERE descripcion LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
 
 router.get('/crearlaboratorios', (req, res) => {
     res.render('../Views/laboratoriosViews/crearlaboratorios.ejs');
@@ -386,7 +395,8 @@ router.post('/actualizarlaboratorios', laboratorios.actualizarlaboratorios);
 //              PERFILES
 router.get('/perfiles', (req, res) => {
 
-    conexion.query('SELECT * FROM perfiles', (error, results) => {
+    conexion.query('SELECT  a.idperfil, a.idprograma, b.titulo, a.idprofesor, c.nombres, a.estado  from perfiles a inner join programas b on a.idprograma=b.idprograma inner join profesores c on a.idprofesor=c.idprofesor;', 
+    (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -394,6 +404,16 @@ router.get('/perfiles', (req, res) => {
         }
     })
 })
+
+router.get('/get_perfiles', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT titulo FROM programas WHERE titulo LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
 
 router.get('/crearperfiles', (req, res) => {
     res.render('../Views/perfilesViews/crearperfiles.ejs');
