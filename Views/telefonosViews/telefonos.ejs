@@ -58,7 +58,7 @@
         </div>
       </nav>
     
-      <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-secondary" data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/telefonos">REGISTRO DE TELEFONOS</a>  
         </div>
@@ -73,7 +73,7 @@
             <div class="col-md-7">
               <div class="mb-3">
                 <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
-                placeholder="Digite el correo electrónico" />
+                placeholder="Digite el nombre del profesor" />
                 <span id="buscar_resultado"></span>
               </div>  
               <a href="/creartelefonos/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
@@ -84,8 +84,10 @@
                         <tr>
                             <th scope="col">IDTELEFONO</th>
                             <th scope="col"></th>
-                            <th scope="col">IDPROFESOR</th>
+                            <th scope="col">PROFESOR</th>
+                            <th scope="col">APELLIDO</th>                          
                             <th scope="col">TELEFONO</th>
+                            <th scope="col">OPCIONES</th>
                             
                         </tr>
                     </thead>
@@ -94,8 +96,9 @@
                             <tr>
                                <td><%= telefonos.idtelefono%></td>
                                <td style="visibility: hidden;"><%= telefonos.idprofesor%></td> 
-                               <td><%= telefonos.numeros%></td>                                                    
-                               <td><%= telefonos.numeros%></td>
+                               <td><%= telefonos.nombres%></td>   
+                               <td><%= telefonos.appaterno%></td>                                                    
+                               <td><%= telefonos.telefono%></td>
                                <td>
                                 <a href="/editartelefonos/<%= telefonos.idtelefono%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
                                 <a href="/deletetelefonos/<%= telefonos.idtelefono%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
@@ -137,7 +140,7 @@
                   var regular_expression = new RegExp('('+query+')', 'gi');
 
                   html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'
-                    +responseData[count].telefono.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+                    +responseData[count].nombres.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
               }
           }
           else
@@ -158,7 +161,7 @@
 
       var query = buscar_elemento.value;
 
-      cargar_telefono(query);
+      cargar_telefonos(query);
 
   };
 
@@ -166,7 +169,7 @@
 
       var query = buscar_elemento.value;
 
-      cargar_telefono(query);
+      cargar_telefonos(query);
 
   };
 

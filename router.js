@@ -550,7 +550,7 @@ router.post('/actualizarprogramas', programas.actualizarprogramas);
 //              TELEFONOS
 router.get('/telefonos', (req, res) => {
 
-    conexion.query('SELECT * FROM telefonos', (error, results) => {
+    conexion.query('select a.idtelefono,a.idprofesor,b.nombres,b.appaterno,a.telefono from telefonos a inner join profesores b on a.idprofesor=b.idprofesor;', (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -559,8 +559,25 @@ router.get('/telefonos', (req, res) => {
     })
 })
 
+
+router.get('/get_telefonos', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT nombres FROM profesores WHERE nombres LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
+
 router.get('/creartelefonos', (req, res) => {
-    res.render('../Views/telefonosViews/creartelefonos.ejs');
+    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',(error, data)=>{  //Query de Mysql.
+        if(error){
+            throw error;
+        } else {                       
+            res.render('../views/telefonosViews/creartelefonos', {data:data});  // Archivo a renderizar            
+        }   
+    })    
 })
 
 
