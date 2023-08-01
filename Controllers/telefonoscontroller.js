@@ -9,7 +9,7 @@ exports.guardartelefonos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const telefono = req.body.telefono;
 
-    conexion.query('INSERT INTO telefonos SET ?', [{idprofessor: idprofesor,
+    conexion.query('INSERT INTO telefonos SET ?', [{idprofesor: idprofesor,
         telefono: telefono}], (error, results) => {
 
         if (error) {

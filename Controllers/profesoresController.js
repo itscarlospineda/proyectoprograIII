@@ -5,7 +5,7 @@ const conexion = require('../database');
 //<GUARDAR un REGISTRO
 
 exports.guardarprofesores = (req, res) => {
-    const idprofesor = req.body.idprofesor;
+    //const idprofesor = req.body.idprofesor;
     const appaterno = req.body.appaterno;
     const apmaterno = req.body.apmaterno;
     const nombres = req.body.nombres;
@@ -15,7 +15,7 @@ exports.guardarprofesores = (req, res) => {
     const genero = req.body.genero;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO profesores SET ?', [{ idprofesor: idprofesor, appaterno: apparteno, 
+    conexion.query('INSERT INTO profesores SET ?', [{ appaterno: appaterno, 
         apmaterno: apmaterno, nombres: nombres, nacimiento: nacimiento, direccion: direccion, 
         referencia: referencia, genero: genero, estado: estado}], (error, results) => {
 
@@ -40,7 +40,7 @@ exports.actualizarprofesores = (req, res) => {
     const genero = req.body.genero;
     const estado = req.body.estado;
 
-    conexion.query('UPDATE profesores SET ? WHERE idprofesor =?', [{ appaterno: apparteno, apmaterno: apmaterno,
+    conexion.query('UPDATE profesores SET ? WHERE idprofesor =?', [{ appaterno: appaterno, apmaterno: apmaterno,
         nombres: nombres, nacimiento: nacimiento, direccion: direccion, referencia: referencia, genero: genero,
          estado: estado }, idprofesor], (error, results) => {
             

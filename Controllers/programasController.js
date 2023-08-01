@@ -5,7 +5,7 @@ const conexion = require('../database');
 //GUARDAR un REGISTRO
 
 exports.guardarprogramas = (req, res) => {
-    const idprograma = req.body.idprograma;
+    //const idprograma = req.body.idprograma;
     const titulo = req.body.titulo;
     const descripcion = req.body.descripcion;
     const objetivos = req.body.objetivos;
@@ -14,7 +14,7 @@ exports.guardarprogramas = (req, res) => {
     const duracion = req.body.duracion;
     const estado = req.body.estado;
 
-    conexion.query('INSERT INTO programas SET ?', [{ idprograma:idprograma, titulo:titulo, descripcion:descripcion,
+    conexion.query('INSERT INTO programas SET ?', [{ titulo:titulo, descripcion:descripcion,
         objetivos: objetivos, requisitos: requisitos, precio: precio, duracion: duracion, estado: estado}],
         (error, results) => {
 
