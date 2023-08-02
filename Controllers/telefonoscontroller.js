@@ -5,11 +5,11 @@ const conexion = require('../database');
 //GUARDAR un REGISTRO
 
 exports.guardartelefonos = (req, res) => {
-    const idtelefono = req.body.idtelefono;
+   // const idtelefono = req.body.idtelefono;
     const idprofesor = req.body.idprofesor;
     const telefono = req.body.telefono;
 
-    conexion.query('INSERT INTO telefonos SET ?', [{ idtelefono: idtelefono, idprofessor: idprofesor,
+    conexion.query('INSERT INTO telefonos SET ?', [{idprofesor: idprofesor,
         telefono: telefono}], (error, results) => {
 
         if (error) {
@@ -27,7 +27,7 @@ exports.actualizartelefonos = (req, res) => {
     const idprofesor = req.body.idprofesor;
     const telefono = req.body.telefono;
 
-    conexion.query('UPDATE telefono SET ? WHERE idtelefono =?', [{ idprofesor: idprofesor, telefono: telefono },
+    conexion.query('UPDATE telefonos SET ? WHERE idtelefono =?', [{ idprofesor: idprofesor, telefono: telefono },
         idtelefono], (error, results) => {
 
         if (error) {

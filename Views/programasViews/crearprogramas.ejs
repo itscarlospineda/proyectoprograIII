@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+    crossorigin="anonymous">
+    <title>INGRESO DE PROGRAMAS</title> <!--CAMBIAR NOMBRE-->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+    <nav class="navbar navbar-dark">      
+      </nav>            
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="navbar-brand" href="#">ADICION DE PROGRAMAS</a> <!--CAMBIAR NOMBRE-->
+              </li>                               
+            </ul>            
+          </div>
+        </div>
+      </nav>
+      <div class="container mt-4">     
+            <div class="card border-secondary">  
+                <div class="card-header">Nuevo Registro</div>
+                <div class="card-body">
+                    <form action="/guardarprogramas" method="POST"> <!--/guardarprogramas   REVISAR ESTO-->
+
+                        <div class="form-group">
+                            <label for="idprograma" class="form-label">Código de Programa</label>
+                            <select class="form-control" id="idprograma" name="idprograma">
+                            <option value="">Seleccionar Programa</option>
+                            <% if(data.length){
+                            for(var i = 0; i< data.length; i++){%> 
+                            <option value="<%= data[i].idprograma%>">
+                            <%= data[i].titulo%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div>  <br>
+
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción del Programa</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" tabindex="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="objetivos" class="form-label">Objetivos del  Programa</label>
+                            <input type="text" class="form-control" id="objetivos" name="objetivos" tabindex="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="requisitos" class="form-label">Requisitos del Programa</label>
+                            <input type="text" class="form-control" id="requisitos" name="requisitos" tabindex="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio del Programa</label>
+                            <input type="text" class="form-control" id="precio" name="precio" tabindex="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="duracion" class="form-label">Duración del Programa</label>
+                            <input type="text" class="form-control" id="duracion" name="duracion" tabindex="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado de Actividad</label>
+                            <input type="text" class="form-control" id="estado" name="estado" tabindex="1">
+                        </div> <br>
+
+                        <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
+
+                        <a href="/programas" class="btn btn-secondary">Cancelar</a> <!--/programas-->
+                    </form>
+                </div>
+            </div>        
+      </div>
+      <br>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+      crossorigin="anonymous"></script>
+</body>
