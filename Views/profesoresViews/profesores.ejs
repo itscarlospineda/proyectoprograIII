@@ -73,7 +73,7 @@
             <div class="col-md-7">
               <div class="mb-3">
                 <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
-                placeholder="Digite el correo electrónico" />
+                placeholder="Digite los Nombres" />
                 <span id="buscar_resultado"></span>
               </div>  
               <a href="/crearprofesores/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
@@ -83,27 +83,32 @@
                     <thead>
                         <tr>
                             <th scope="col">IDPROFESOR</th>
-                            <th scope="col">APPATERNO</th>
-                            <th scope="col">AMATERNO</th>
                             <th scope="col">NOMBRES</th>
+                            <th scope="col">APELLIDO PATERNO</th>
+                            <th scope="col">APELLIDO MATERNO</th>
                             <th scope="col">NACIMIENTO</th>
                             <th scope="col">DIRECCION</th>
                             <th scope="col">REFERENCIA</th>
                             <th scope="col">GENERO</th>
-                            <th scope="col">ESTADO</th>
-                            <th scope="col">OPCIONES</th>  
+                            <th scope="col">ESTADO</th>  
+                            <th scope="col">OPCIONES</th> 
                         </tr>
                     </thead>
                     <tbody> 
                         <% results.forEach((profesores)=> { %>   <!--<revisar aqui por favor> -->                                 
                             <tr>
-                               <td><%= profesores.idprofesor%></td> 
-                               <td style="visibility: hidden;"><%= correos.idprofesor%></td>
-                               <td><%= correos.nombres%></td>                                                    
-                               <td><%= correos.correo%></td>
+                               <td><%= profesores.idprofesor%></td>                               
+                               <td><%= profesores.nombres%></td>                                                    
+                               <td><%= profesores.appaterno%></td>
+                               <td><%= profesores.apmaterno%></td>
+                               <td><%= profesores.nacimiento%></td>
+                               <td><%= profesores.direccion%></td>
+                               <td><%= profesores.referencia%></td>
+                               <td><%= profesores.genero%></td>
+                               <td><%= profesores.estado%></td>
                                <td>
                                 <a href="/editarprofesores/<%= profesores.idprofesor%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
-                                <a href="/deleteprofesores/<%= profesores.idprofesores%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                                <a href="/deleteprofesores/<%= profesores.idprofesor%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
                                </td>                          
    
                            </tr>
@@ -142,7 +147,7 @@
                   var regular_expression = new RegExp('('+query+')', 'gi');
 
                   html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'
-                    +responseData[count].correo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+                    +responseData[count].nombres.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
               }
           }
           else
@@ -163,7 +168,7 @@
 
       var query = buscar_elemento.value;
 
-      cargar_correos(query);
+      cargar_profesores(query);
 
   };
 
@@ -171,17 +176,17 @@
 
       var query = buscar_elemento.value;
 
-      cargar_correos(query);
+      cargar_profesores(query);
 
   };
 
   function cargar_texto(event)
   {
-      var correo = event.textContent;
+      var profesores = event.textContent;
 
-      console.log(correo);
+      console.log(profesores);
 
-      document.getElementById('autocompleta_busqueda').value = correo;
+      document.getElementById('autocompleta_busqueda').value = profesores;
 
       document.getElementById('buscar_resultado').innerHTML = '';
   }

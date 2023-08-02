@@ -32,18 +32,15 @@
                 <div class="card-body">
                     <form action="/guardarprogramas" method="POST"> <!--/guardarprogramas   REVISAR ESTO-->
 
-                        <div class="form-group">
-                            <label for="idprograma" class="form-label">Código de Programa</label>
-                            <select class="form-control" id="idprograma" name="idprograma">
-                            <option value="">Seleccionar Programa</option>
-                            <% if(data.length){
-                            for(var i = 0; i< data.length; i++){%> 
-                            <option value="<%= data[i].idprograma%>">
-                            <%= data[i].titulo%>
-                            </option>
-                            <% } } %>
-                            </select>
-                        </div>  <br>
+                        <div class="mb-3">
+                            <label for="idprograma" class="form-label">Código del Programa</label>
+                            <input type="text" class="form-control" id="idprograma" name="idprograma" tabindex="1">
+                        </div>  
+
+                        <div class="mb-3">
+                            <label for="Titulo" class="form-label">Titulo</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" tabindex="1">
+                        </div>
 
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción del Programa</label>

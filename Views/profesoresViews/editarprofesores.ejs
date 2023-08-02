@@ -25,13 +25,13 @@
           </div>
         </div>
       </nav>
-      <% if (--profesores) { %> <!--nombre de tablas-->
+      <% if (profesores) { %> <!--nombre de tablas-->
       <div class="container mt-4">          
           <div class="card border-secondary">  
                 <div class="card-header">Actualización de Profesores</div> <!--CAMBIAR NOMBRE-->
                 <div class="card-body">
                     <form action="/actualizarprofesores" method="POST"> <!--/actualizarprofesores-->
-                         <input idcurso="idprofesor" name="idprofesor" value="<%= profesores.idprofesor%>" hidden> <!--llave principal-->
+                         <input idprofesor="idprofesor" name="idprofesor" value="<%= profesores.idprofesor%>" hidden> <!--llave principal-->
 
                          <div class="mb-3">
                             <label for="appaterno" class="form-label">Apellido Paterno</label>

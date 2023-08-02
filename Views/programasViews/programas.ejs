@@ -61,7 +61,7 @@
     
       <nav class="navbar navbar-expand-lg bg-warning" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/cursos">REGISTRO DE PROGRAMAS</a> <!--CAMBIAR NOMBRE-->
+          <a class="navbar-brand" href="/programas">REGISTRO DE PROGRAMAS</a> <!--CAMBIAR NOMBRE-->
         </div>
       </nav>
       
@@ -85,9 +85,7 @@
                     <thead>
                         <tr>
                             <th>IDPROGRAMA</th>
-                            <th></th>
                             <th>TITULO</th>
-                            <th></th>
                             <th>DESCRIPCION</th>  
                             <th>OBJETIVOS</th>
                             <th>REQUISITOS</th>
@@ -99,18 +97,17 @@
                     <tbody> 
                         <% results.forEach((programas)=> { %>                                     
                             <tr>
-                               <td><%= programas.idprograma%></td>
-                               <td style="visibility: hidden;"><%= programas.idprograma%></td> 
-                               <td><%=  programas.titulo%></td>
+                               <td><%= programas.idprograma%></td>                             
+                               <td><%= programas.titulo%></td>
                                <td><%= programas.descripcion%></td>
                                <td><%= programas.objetivos%></td>
                                <td><%= programas.requisitos%></td>
                                <td><%= programas.precio%></td>
                                <td><%= programas.duracion%></td>
-                               <td><%= estado.estado%></td>
+                               <td><%= programas.estado%></td>
                                <td>
-                                <a href="/editarprogramas/<%= programa.idprograma%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
-                                <a href="/deleteprogramas/<%= cursos.idprograma%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                                <a href="/editarprogramas/<%= programas.idprograma%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
+                                <a href="/deleteprogramas/<%= programas.idprograma%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
                                </td>                          
    
                            </tr>
@@ -131,7 +128,7 @@
 
 <script>
 
-  function cargar_programa(query = '')
+  function cargar_programas(query = '')
   {
       fetch('/get_programas?buscar_query='+query+'').then(function(response){
 
@@ -147,7 +144,7 @@
               {
                   var regular_expression = new RegExp('('+query+')', 'gi');
 
-                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].descripcion.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].titulo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
               }
           }
           else
@@ -182,11 +179,11 @@
 
   function cargar_texto(event)
   {
-      var curso = event.textContent;
+      var programas = event.textContent;
 
       console.log(programas);   
 
-      document.getElementById('autocompleta_busqueda').value = curso;
+      document.getElementById('autocompleta_busqueda').value = programas;
 
       document.getElementById('buscar_resultado').innerHTML = '';
   }

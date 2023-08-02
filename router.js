@@ -462,6 +462,18 @@ router.get('/profesores', (req, res) => {
         }
     })
 })
+router.get('/get_profesores', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `
+    SELECT nombres FROM profesores 
+    WHERE nombres LIKE '%${buscar_query}%' 
+    LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
 
 router.get('/crearprofesores', (req, res) => {
     res.render('../Views/profesoresViews/crearprofesores.ejs');
@@ -510,7 +522,17 @@ router.get('/programas', (req, res) => {
         }
     })
 })
-
+router.get('/get_programas', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `
+    SELECT titulo FROM programas 
+    WHERE titulo LIKE '%${buscar_query}%' 
+    LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
 router.get('/crearprogramas', (req, res) => {
     res.render('../Views/programasViews/crearprogramas.ejs');
 })
