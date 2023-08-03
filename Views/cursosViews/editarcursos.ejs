@@ -33,11 +33,18 @@
                     <form action="/actualizarcursos" method="POST"> <!--/actualizarprofesores-->
                          <input idcurso="idcurso" name="idcurso" value="<%= cursos.idcurso %>" hidden> <!--llave principal-->
 
-                        <!--<div class="mb-3">
+                         <div class="form-group">
                             <label for="idprograma" class="form-label">Código de Programa</label>
-                            <input type="text" class="form-control" id="idprograma" name="idprograma" 
-                            tabindex="1" value="<%= cursos.idprograma  %>" 
-                        </div> -->
+                            <select class="form-control" id="idprograma" name="idprograma">
+                            <option value="">Seleccionar Programa</option>
+                            <% if(data.length){
+                            for(var i = 0; i< data.length; i++){%> 
+                            <option value="<%= data[i].idprograma%>">
+                            <%= data[i].titulo%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div>  <br>
 
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción del Curso</label>

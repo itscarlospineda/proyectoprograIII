@@ -33,23 +33,44 @@
                     <form action="/actualizarhorarios" method="POST">
                          <input idhorario="idhorario" name="idhorario" value="<%= horarios.idhorario %>" hidden>
 
-                        <div class="mb-3">
-                            <label for="idperfil" class="form-label">Ingrese Perfil ID</label>
-                            <input type="text" class="form-control" id="idperfil" name="idperfil" 
-                            tabindex="1" value="<%= horarios.idperfil  %>">
-                        </div> 
+                         <div class="form-group">
+                          <label for="idprograma" class="form-label">Código de Perfil</label>
+                          <select class="form-control" id="idprograma" name="idprograma">
+                          <option value="">Seleccionar Perfil</option>
+                          <% if(data.length){
+                          for(var i = 0; i< data.length; i++){%> 
+                          <option value="<%= data[i].idperfil%>">
+                          <%= data[i].titulo%>
+                          </option>
+                          <% } } %>
+                          </select>
+                      </div>  <br>
 
-                        <div class="mb-3">
-                          <label for="idlaboratorio" class="form-label">Ingrese Laboratorio ID</label>
-                          <input type="text" class="form-control" id="idlaboratorio" name="idlaboratorio" 
-                          tabindex="1" value="<%= horarios.idlaboratorio  %>">
-                      </div> 
+                      <div class="form-group">
+                          <label for="idlaboratorio" class="form-label">Código de Laboratorio</label>
+                          <select class="form-control" id="idlaboratorio" name="idlaboratorio">
+                          <option value="">Seleccionar Laboratorio</option>
+                          <% if(datum.length){
+                          for(var i = 0; i< datum.length; i++) {%> 
+                          <option value="<%= datum[i].idlaboratorio%>">
+                          <%= datum[i].descripcion%>
+                          </option>
+                          <% } } %>
+                          </select>
+                      </div> <br>
 
-                      <div class="mb-3">
-                        <label for="idfrecuencia" class="form-label">Ingrese Fecha Frecuencia ID</label>
-                        <input type="text" class="form-control" id="idfrecuencia" name="idfrecuencia" 
-                        tabindex="1" value="<%= horarios.idfrecuencia  %>">
-                    </div> 
+                      <div class="form-group">
+                          <label for="idfrecuencia" class="form-label">Código de Frecuencia</label>
+                          <select class="form-control" id="idfrecuencia" name="idfrecuencia">
+                          <option value="">Seleccionar Modalidad de Estudio</option>
+                          <% if(datas.length){
+                          for(var i = 0; i< datas.length; i++) {%> 
+                          <option value="<%= datas[i].idfrecuencia%>">
+                          <%= datas[i].modalidad%>
+                          </option>
+                          <% } } %>
+                          </select>
+                      </div> <br>
 
                       <div class="mb-3">
                         <label for="fechainicio" class="form-label">Ingrese Fecha de Inicio</label>

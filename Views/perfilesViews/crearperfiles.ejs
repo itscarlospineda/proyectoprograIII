@@ -33,15 +33,32 @@
                     <form action="/guardarperfiles" method="POST">
 
 
-                        <div class="mb-3">
-                            <label for="idprograma" class="form-label">Código de Programa</label>
-                            <input type="text" class="form-control" id="idprograma" name="idprograma" tabindex="1">
-                        </div>
+                      <div class="form-group">
+                        <label for="idprograma" class="form-label">Código de Programa</label>
+                        <select class="form-control" id="idprograma" name="idprograma">
+                        <option value="">Seleccionar Programa</option>
+                        <% if(data.length){
+                        for(var i = 0; i< data.length; i++) {%> 
+                        <option value="<%= data[i].idprograma%>">
+                        <%= data[i].titulo%>
+                        </option>
+                        <% } } %>
+                        </select>
+                      </div>  
 
-                        <div class="mb-3">
-                            <label for="idprofesor" class="form-label">Código de Profesor</label>
-                            <input type="text" class="form-control" id="idprofesor" name="idprofesor" tabindex="1">
-                        </div>
+
+                      <div class="form-group">
+                        <label for="idprofesor" class="form-label">Código de Profesor</label>
+                        <select class="form-control" id="idprofesor" name="idprofesor">
+                        <option value="">Seleccionar Profesor</option>
+                        <% if(datum.length){
+                        for(var i = 0; i< datum.length; i++) {%> 
+                        <option value="<%= datum[i].idprofesor%>">
+                        <%= datum[i].nombres%>
+                        </option>
+                        <% } } %>
+                        </select>
+                      </div>  
 
                         <div class="mb-3">
                             <label for="estado" class="form-label">Estado</label>

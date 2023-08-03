@@ -38,7 +38,7 @@
                             <option value="">Seleccionar Perfil</option>
                             <% if(data.length){
                             for(var i = 0; i< data.length; i++){%> 
-                            <option value="<%= data[i].idprograma%>">
+                            <option value="<%= data[i].idperfil%>">
                             <%= data[i].titulo%>
                             </option>
                             <% } } %>
@@ -49,28 +49,35 @@
                             <label for="idlaboratorio" class="form-label">Código de Laboratorio</label>
                             <select class="form-control" id="idlaboratorio" name="idlaboratorio">
                             <option value="">Seleccionar Laboratorio</option>
-                            <% if(data.length){
-                            for(var i = 0; i< data.length; i++) {%> 
-                            <option value="<%= data[i].idlaboratorio%>">
-                            <%= data[i].descripcion%>
+                            <% if(datum.length){
+                            for(var i = 0; i< datum.length; i++) {%> 
+                            <option value="<%= datum[i].idlaboratorio%>">
+                            <%= datum[i].descripcion%>
                             </option>
                             <% } } %>
                             </select>
                         </div> <br>
 
+                        <div class="form-group">
+                            <label for="idfrecuencia" class="form-label">Código de Frecuencia</label>
+                            <select class="form-control" id="idfrecuencia" name="idfrecuencia">
+                            <option value="">Seleccionar Modalidad de Estudio</option>
+                            <% if(datas.length){
+                            for(var i = 0; i< datas.length; i++) {%> 
+                            <option value="<%= datas[i].idfrecuencia%>">
+                            <%= datas[i].modalidad%>
+                            </option>
+                            <% } } %>
+                            </select>
+                        </div> <br>
 
                         <div class="mb-3">
-                            <label for="idfrecuencia" class="form-label">ID Frecuencia</label>
-                            <input type="text" class="form-control" id="idfrecuencia" name="idfrecuencia" tabindex="1">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fechainicio" class="form-label">Fecha de Inicio</label>
+                            <label for="fechainicio" class="form-label">Fecha de Inicio (yyyy-mm-dd)</label>
                             <input type="text" class="form-control" id="fechainicio" name="fechainicio" tabindex="1">
                         </div>
 
                         <div class="mb-3">
-                            <label for="fechafin" class="form-label">Fecha de Fin</label>
+                            <label for="fechafin" class="form-label">Fecha de Fin (yyyy-mm-dd)</label>
                             <input type="text" class="form-control" id="fechafin" name="fechafin" tabindex="1">
                         </div>
 

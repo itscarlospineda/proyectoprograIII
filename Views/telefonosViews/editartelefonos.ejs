@@ -33,11 +33,20 @@
                     <form action="/actualizartelefonos" method="POST">
                          <input idcorreo="idtelefono" name="idtelefono" value="<%= telefonos.idtelefono %>" hidden>
 
-                         <div class="mb-3">
-                          <label for="idprofesor" class="form-label">Código del Profesor</label>
-                          <input type="text" class="form-control" id="idprofesor" name="idprofesor" 
-                          tabindex="1" value="<%= telefonos.idprofesor%>">
-                        </div>   
+                         <div class="form-group">
+                          
+                          <label for="idprofesor" class="form-label">Profesor</label>
+                          <select class="form-control" id="idprofesor" name="idprofesor">
+                          <option value="">Seleccionar profesor</option>
+                          <% if(data.length){
+                          for(var i = 0; i< data.length; i++) {%> 
+                          <option value="<%= data[i].idprofesor%>">
+                          <%= data[i].nombres%>
+                          </option>
+                          <% } } %>
+                          </select>
+                        </div>  
+                        <br>  
                         
 
                         <div class="mb-3">
@@ -45,18 +54,6 @@
                             <input type="text" class="form-control" id="telefono" name="telefono" 
                             tabindex="1" value="<%= telefonos.telefono  %>">
                         </div>     
-                        
-                        <div class="mb-3">
-                          <label for="telefono" class="form-label">Teléfono</label>
-                          <input type="text" class="form-control" id="telefono" name="telefono" 
-                          tabindex="1" value="<%= telefonos.telefono  %>">
-                      </div>    
-
-                      <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" 
-                        tabindex="1" value="<%= telefonos.telefono  %>">
-                    </div>    
                                                                                        
                         <button type="submit" class="btn btn-primary" tabindex="5">Actualizar</button>
                         <a href="/telefonos" class="btn btn-danger">Cancelar</a>   

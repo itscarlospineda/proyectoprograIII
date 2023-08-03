@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const conexion = require('./database');
 const conexion2 = require('./database');
+const conexion3 = require('./database');
+const conexion4 = require('./database');
 
 
 ////   ACCESO AL SISTEMA/////
@@ -69,14 +71,16 @@ router.get('/home', (req, res)=>{
     res.render('home.ejs');               
 })
 
-
+router.get('/aboutus', (req, res)=>{     
+    res.render('aboutus.ejs');               
+})
 
 
 
 // CORREOS
 router.get('/correos', (req, res) => {
 
-    conexion.query('select a.idcorreo,a.idprofesor,b.nombres,a.correo from correos a inner join profesores b on a.idprofesor=b.idprofesor;',
+    conexion.query('select a.idcorreo,a.idprofesor,b.nombres,b.appaterno,a.correo from correos a inner join profesores b on a.idprofesor=b.idprofesor;',
      (error, results) => {
         if (error) {
             throw error;
@@ -97,7 +101,7 @@ router.get('/get_correos', function(request, response, next){
 
 
 router.get('/crearcorreos', (req, res)=>{     
-    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',(error, data)=>{  //Query de Mysql.
+    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor asc',(error, data)=>{  //Query de Mysql.
         if(error){
             throw error;
         } else {                       
@@ -124,7 +128,14 @@ router.get('/editarcorreos/:idcorreo', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/correosViews/editarcorreos.ejs', {correos:results[0]});
+            conexion2.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor asc',(error, data)=>{  //Query de Mysql.
+                if(error){
+                    throw error;
+                } else {                       
+                    res.render('../Views/correosViews/editarcorreos.ejs', {correos:results[0], data:data});          
+                }   
+            })  
+            
         }
     });
 });
@@ -194,7 +205,14 @@ router.get('/editarcursos/:idcurso', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/cursosViews/editarcursos.ejs', { cursos: results[0] });
+            conexion2.query('SELECT idprograma,titulo FROM programas ORDER BY idprograma asc',(error, data)=>{ 
+                if(error){
+                    throw error;
+                } else {                       
+                    res.render('../Views/cursosViews/editarcursos.ejs', { cursos: results[0], data:data });           
+                }   
+            }) 
+            
         }
     });
 });
@@ -291,16 +309,35 @@ router.get('/get_horarios', function(request, response, next){
 
 router.get('/crearhorarios', (req, res)=>{    
 
-    conexion.query(`SELECT idprograma,titulo FROM programas ORDER BY idprograma asc`,
+    conexion.query(`select a.idperfil,a.idprograma,b.titulo from perfiles a inner join programas b on a.idprograma=b.idprograma order by idperfil asc`,
     (error, data)=>{  //Query de Mysql
 
         if(error){
             throw error;
-        } else {                       
-            res.render('../views/horariosViews/crearhorarios', {data:data});  // Archivo a renderizar            
+        } else {         
+
+            conexion2.query(`select idlaboratorio,descripcion from laboratorios ORDER BY idlaboratorio asc`,
+            (error2, datum)=>{  //Query de Mysql
+        
+                if(error2){
+                    throw error2;
+                } else {              
+
+                    conexion3.query(`select idfrecuencia,modalidad from frecuencias ORDER BY idfrecuencia asc`,
+                    (error3,datas)=>{
+
+                        if(error3){
+                            throw error3;
+                        } else {
+
+                            res.render('../views/horariosViews/crearhorarios', {data:data , datum:datum, datas:datas});   
+                        }
+                    })   
+                }  
+            })                              
         }   
-    })               
-})
+    }) 
+});
 
 
 
@@ -321,7 +358,34 @@ router.get('/editarhorarios/:idhorario', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/horariosViews/editarhorarios.ejs', {horarios:results[0]});
+            conexion2.query(`select a.idperfil,a.idprograma,b.titulo from perfiles a inner join programas b on a.idprograma=b.idprograma order by idperfil asc`,
+                (error2, data)=>{  //Query de Mysql
+
+            if(error2){
+                throw error2;
+            } else {         
+
+                conexion3.query(`select idlaboratorio,descripcion from laboratorios ORDER BY idlaboratorio asc`,
+                (error3, datum)=>{  //Query de Mysql
+        
+                    if(error3){
+                        throw error3;
+                    } else {              
+
+                    conexion4.query(`select idfrecuencia,modalidad from frecuencias ORDER BY idfrecuencia asc`,
+                    (error4,datas)=>{
+
+                        if(error4){
+                            throw error4;
+                        } else {
+
+                            res.render('../views/horariosViews/editarhorarios.ejs', {horarios:results[0], data:data , datum:datum, datas:datas});   
+                        }
+                    })   
+                }  
+            })                              
+        }   
+    })
         }
     });
 });
@@ -416,7 +480,27 @@ router.get('/get_perfiles', function(request, response, next){
 
 
 router.get('/crearperfiles', (req, res) => {
-    res.render('../Views/perfilesViews/crearperfiles.ejs');
+
+    conexion.query(`select idprograma,titulo FROM programas ORDER BY idprograma asc`,
+    (error, data)=>{  //Query de Mysql
+
+        if(error){
+            throw error;
+        } else {         
+
+            conexion2.query(`select idprofesor,nombres FROM profesores ORDER BY idprofesor asc`,
+            (error2, datum)=>{  //Query de Mysql
+        
+                if(error2){
+                    throw error2;
+                } else {              
+
+                    res.render('../Views/perfilesViews/crearperfiles.ejs', {data:data, datum:datum});
+                }  
+            })                              
+        }   
+    }) 
+    
 })
 
 
@@ -437,7 +521,27 @@ router.get('/editarperfiles/:idperfil', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/perfilesViews/editarperfiles.ejs', { perfiles: results[0] });
+
+            conexion2.query(`select idprograma,titulo FROM programas ORDER BY idprograma asc`,
+            (error2, data)=>{  //Query de Mysql
+
+            if(error2){
+                throw error2;
+            } else {         
+
+                conexion3.query(`select idprofesor,nombres FROM profesores ORDER BY idprofesor asc`,
+                (error3, datum)=>{  //Query de Mysql
+        
+                if(error3){
+                    throw error3;
+                } else {              
+
+                    res.render('../Views/perfilesViews/editarperfiles.ejs', { perfiles: results[0], data:data, datum:datum });
+                }  
+            })                              
+        }   
+    })
+
         }
     });
 });
@@ -620,9 +724,19 @@ router.get('/editartelefonos/:idtelefono', (req, res) => {
         if (error) {
             throw error;
         } else {
-            res.render('../Views/telefonosViews/editartelefonos.ejs', { telefonos: results[0] });
+
+            conexion2.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',
+            (error2, data)=>{ 
+                
+                if(error2){
+                    throw error2;
+                } else {                       
+                    res.render('../Views/telefonosViews/editartelefonos.ejs', {telefonos:results[0], data:data});           
+                }   
+            })
+            
         }
-    });
+    })
 });
 
 

@@ -30,7 +30,7 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" href="/aboutus">About Us</a>
               </li>
 
               <li class="nav-item dropdown">
@@ -70,7 +70,7 @@
 
     <div class="container">                
         <div class="row mt-5">
-            <div class="col-md-7">
+            <div class="col-md-10">
               <div class="mb-3">
                 <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
                 placeholder="Digite el correo electrónico" />
@@ -84,7 +84,8 @@
                         <tr>
                             <th scope="col">IDCORREO</th>
                             <th scope="col"></th>
-                            <th scope="col">PROFESOR</th>
+                            <th scope="col">NOMBRES</th>
+                            <th scope="col">APELLIDO</th>
                             <th scope="col">CORREO ELECTRONICO</th>
                             <th scope="col">OPCIONES</th>  
                         </tr>
@@ -94,7 +95,8 @@
                             <tr>
                                <td><%= correos.idcorreo%></td>
                                <td style="visibility: hidden;"><%= correos.idprofesor%></td>
-                               <td><%= correos.nombres%></td>                                                    
+                               <td><%= correos.nombres%></td>  
+                               <td><%= correos.appaterno%></td>                                                    
                                <td><%= correos.correo%></td>
                                <td>
                                 <a href="/editarcorreos/<%= correos.idcorreo%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
