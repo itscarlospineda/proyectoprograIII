@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
       }
       else
       {
-          response.send('Por Favor Digite el Correo y la');
+          response.send('Por Favor, digite el correo y la contraseña correcta');
           response.end();
       }
   
@@ -80,7 +80,7 @@ router.get('/aboutus', (req, res)=>{
 // CORREOS
 router.get('/correos', (req, res) => {
 
-    conexion.query('select a.idcorreo,a.idprofesor,b.nombres,b.appaterno,a.correo from correos a inner join profesores b on a.idprofesor=b.idprofesor;',
+    conexion.query('select a.idcorreo,a.idprofesor,b.nombres,b.appaterno,a.correo from correos a inner join profesores b on a.idprofesor=b.idprofesor order by idcorreo asc',
      (error, results) => {
         if (error) {
             throw error;
@@ -152,7 +152,7 @@ router.post('/actualizarcorreos', correos.actualizarcorreos);
 //      CURSOS
 router.get('/cursos', (req, res) => {
 
-    conexion.query('select a.idcurso,a.idprograma,b.titulo,a.descripcion,a.objetivos,a.requisitos,a.precio,a.duracion,a.estado from cursos a inner join programas b on a.idprograma=b.idprograma',
+    conexion.query('select a.idcurso,a.idprograma,b.titulo,a.descripcion,a.objetivos,a.requisitos,a.precio,a.duracion,a.estado from cursos a inner join programas b on a.idprograma=b.idprograma order by idcurso asc',
      (error, results) => {
 
         if (error) {
@@ -697,7 +697,7 @@ router.get('/get_telefonos', function(request, response, next){
 
 
 router.get('/creartelefonos', (req, res) => {
-    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',(error, data)=>{  //Query de Mysql.
+    conexion.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor asc',(error, data)=>{  //Query de Mysql.
         if(error){
             throw error;
         } else {                       
@@ -725,7 +725,7 @@ router.get('/editartelefonos/:idtelefono', (req, res) => {
             throw error;
         } else {
 
-            conexion2.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor desc',
+            conexion2.query('select idprofesor,nombres FROM profesores ORDER BY idprofesor asc',
             (error2, data)=>{ 
                 
                 if(error2){
@@ -740,9 +740,64 @@ router.get('/editartelefonos/:idtelefono', (req, res) => {
 });
 
 
-const telefonos = require('./Controllers/telefonoscontroller');
+const telefonos = require('./Controllers/telefonosController');
 router.post('/guardartelefonos', telefonos.guardartelefonos);
 router.post('/actualizartelefonos', telefonos.actualizartelefonos);
 
+
+
+//              TELEFONOS
+router.get('/usuarios', (req, res) => {
+
+    conexion.query('SELECT id,usuario,clave,correo,estado FROM CUENTAUSUARIO', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('../Views/usuariosViews/usuarios.ejs', { results: results });
+        }
+    })
+})
+
+
+router.get('/get_usuarios', function(request, response, next){
+	
+    var buscar_query = request.query.buscar_query;    
+    var query = `SELECT usuario FROM cuentausuario WHERE usuario LIKE '%${buscar_query}%' LIMIT 1 `;   
+    conexion.query(query, function(error, data){    
+        response.json(data);    
+    });    
+});
+
+
+router.get('/crearusuarios', (req, res) => {
+    res.render('../Views/usuariosViews/crearusuarios.ejs');
+})
+
+
+router.get('/deleteusuarios/:id', (req, res) => {
+    const id = req.params.id;
+    conexion.query('DELETE FROM cuentausuario WHERE id= ?', [ids], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/usuarios');
+        }
+    })
+});
+
+/*router.get('/editarusuarios/:id', (req, res) => {
+    const id = req.params.id;
+    conexion.query('SELECT * FROM cuentausuario WHERE id=?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {                    
+            res.render('../Views/usuariosViews/editarusuarios.ejs', {cuentausuario:results[0]});           
+        }
+    })
+});*/
+
+
+const usuarios = require('./Controllers/usuariosController');
+router.post('/guardarusuarios', usuarios.guardarusuarios);
 
 module.exports=router;

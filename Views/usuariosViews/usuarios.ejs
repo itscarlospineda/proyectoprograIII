@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTRO DE PROGRAMAS</title> <!--CAMBIAR NOMBRE-->
+    <title>MANTENIMIENTO</title>
     <link rel="stylesheet" href="/Resources/Templates/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
@@ -28,7 +28,7 @@
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
-
+              
               <li class="nav-item">
                 <a class="nav-link" href="/aboutus">About Us</a>
               </li>
@@ -52,16 +52,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Logout</a>
               </li>
-              
             </ul>
             
           </div>
         </div>
       </nav>
     
-      <nav class="navbar navbar-expand-lg bg-danger" data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/programas">REGISTRO DE PROGRAMAS</a> <!--CAMBIAR NOMBRE-->
+          <a class="navbar-brand" href="/usuarios">MANTENIMIENTO DE USUARIOS</a>
         </div>
       </nav>
       
@@ -69,52 +68,45 @@
         <a href="/" class="navbar-brand"><center>REGISTRO DE CORREOS</center></a>
     </nav> -->
 
-    <div class="container">
+    <div class="container">                
         <div class="row mt-5">
-            <div class="col-md-14">
+            <div class="col-md-10">
               <div class="mb-3">
-                
-                <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" placeholder="Digite el curso" />
+                <input type="text" id="autocompleta_busqueda" class="form-control form-control-lg" 
+                placeholder="Digite el usuario" />
                 <span id="buscar_resultado"></span>
-                </div>                  
-
- <!-- CAMBIAR RUTA--><a href="/crearprogramas/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
-                 <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
-                 <br><br>
+              </div>  
+              <a href="/crearusuarios/" class="btn btn-outline-success"><i class='bx bxs-trash-alt'></i>Añadir Nuevo Registro</a>
+              <a href="/home" class="btn btn-outline-warning"><i class='bx bxs-trash-alt'></i>Regresar a Home</a> 
+              <br> <br>
                 <table class="table table-borbered table-hover">
                     <thead>
                         <tr>
-                            <th>IDPROGRAMA</th>
-                            <th>TITULO</th>
-                            <th>DESCRIPCION</th>  
-                            <th>OBJETIVOS</th>
-                            <th>REQUISITOS</th>
-                            <th>PRECIO</th>
-                            <th>DURACION</th>  
-                            <th>ESTADO</th> 
-                            <th>OPCIONES</th>  
+                            <th scope="col">IDUSUARIO</th>
+                            <th scope="col">USUARIO</th>
+                            <th scope="col">CORREO ELECTRONICO</th>
+                            <th scope="col"></th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">OPCIONES</th>  
                         </tr>
                     </thead>
                     <tbody> 
-                        <% results.forEach((programas)=> { %>                                     
+                        <% results.forEach((cuentausuario)=> { %>                                     
                             <tr>
-                               <td><%= programas.idprograma%></td>                             
-                               <td><%= programas.titulo%></td>
-                               <td><%= programas.descripcion%></td>
-                               <td><%= programas.objetivos%></td>
-                               <td><%= programas.requisitos%></td>
-                               <td><%= programas.precio%></td>
-                               <td><%= programas.duracion%></td>
-                               <td><%= programas.estado%></td>
+                               <td><%= cuentausuario.id%></td>
+                               <td><%= cuentausuario.usuario%></td>  
+                               <td><%= cuentausuario.correo%></td>                                                    
+                               <td style="visibility: hidden;"><%= cuentausuario.clave%></td>
+                               <td><%= cuentausuario.estado%></td>
                                <td>
-                                <a href="/editarprogramas/<%= programas.idprograma%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
-                                <a href="/deleteprogramas/<%= programas.idprograma%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
+                                
+                                <a href="/deleteusuarios/<%= cuentausuario.id%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>
                                </td>                          
    
                            </tr>
                        <% }) %>
                     </tbody>
-                 </table>
+                </table>
             </div>
             
         </div>
@@ -127,11 +119,12 @@
 </body>
 </html>
 
+
 <script>
 
-  function cargar_programas(query = '')
+  function cargar_usuarios(query = '')
   {
-      fetch('/get_programas?buscar_query='+query+'').then(function(response){
+      fetch('/get_usuarios?buscar_query='+query+'').then(function(response){
 
           return response.json();
 
@@ -145,7 +138,8 @@
               {
                   var regular_expression = new RegExp('('+query+')', 'gi');
 
-                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+responseData[count].titulo.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
+                  html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'
+                    +responseData[count].usuario.replace(regular_expression, '<span class="text-primary fw-bold">$1</span>')+'</a>';
               }
           }
           else
@@ -166,7 +160,7 @@
 
       var query = buscar_elemento.value;
 
-      cargar_programas(query);
+      cargar_usuarios(query);
 
   };
 
@@ -174,17 +168,17 @@
 
       var query = buscar_elemento.value;
 
-      cargar_programas(query);
+      cargar_usuarios(query);
 
   };
 
   function cargar_texto(event)
   {
-      var programas = event.textContent;
+      var usuario = event.textContent;
 
-      console.log(programas);   
+      console.log(usuario);
 
-      document.getElementById('autocompleta_busqueda').value = programas;
+      document.getElementById('autocompleta_busqueda').value = usuario;
 
       document.getElementById('buscar_resultado').innerHTML = '';
   }
