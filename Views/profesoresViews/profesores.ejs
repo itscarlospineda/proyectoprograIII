@@ -82,30 +82,32 @@
                 <table class="table table-borbered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">IDPROFESOR</th>
-                            <th scope="col">NOMBRES</th>
-                            <th scope="col">APELLIDO PATERNO</th>
-                            <th scope="col">APELLIDO MATERNO</th>
+                            <th scope="col">IDESTUDIANTE</th>
+                            <th scope="col">PRIM NOMBRE</th>
+                            <th scope="col">SEG NOMBRE</th>
+                            <th scope="col">PRIM APELLIDO</th>
+                            <th scope="col">SEG APELLIDO</th>
                             <th scope="col">NACIMIENTO</th>
-                            <th scope="col">DIRECCION</th>
-                            <th scope="col">REFERENCIA</th>
-                            <th scope="col">GENERO</th>
-                            <th scope="col">ESTADO</th>  
+                            <th scope="col">EDAD</th>
+                            <th scope="col">SEXO</th>
+                            <th scope="col">CELULAR</th>
+                            <th scope="col">CELULAR</th>  
                             <th scope="col">OPCIONES</th> 
                         </tr>
                     </thead>
                     <tbody> 
-                        <% results.forEach((profesores)=> { %>   <!--<revisar aqui por favor> -->                                 
+                        <% results.forEach((estudiante)=> { %>   <!--<revisar aqui por favor> -->                                 
                             <tr>
-                               <td><%= profesores.idprofesor%></td>                               
-                               <td><%= profesores.nombres%></td>                                                    
-                               <td><%= profesores.appaterno%></td>
-                               <td><%= profesores.apmaterno%></td>
-                               <td><%= profesores.nacimiento%></td>
-                               <td><%= profesores.direccion%></td>
-                               <td><%= profesores.referencia%></td>
-                               <td><%= profesores.genero%></td>
-                               <td><%= profesores.estado%></td>
+                               <td><%= estudiante.est_id%></td>                               
+                               <td><%= estudiante.est_pnom%></td>
+                               <td><%= estudiante.est_snom%></td>
+                               <td><%= estudiante.est_pape%></td>
+                               <td><%= estudiante.est_sape%></td>
+                               <td><%= estudiante.est_fecna%></td>
+                               <td><%= estudiante.est_edad%></td>
+                               <td><%= estudiante.est_sexo%></td>
+                               <td><%= estudiante.est_cel%></td>
+                               <td><%= estudiante.est_correo%></td>
                                <td>
                                 <a href="/editarprofesores/<%= profesores.idprofesor%>" class="btn btn-outline-primary"><i class='bx bxs-edit'></i>Editar</a>
                                 <a href="/deleteprofesores/<%= profesores.idprofesor%>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i>Eliminar</a>

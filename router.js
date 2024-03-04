@@ -18,6 +18,10 @@ router.get('/', function(req, res, next) {
   
       var clave = request.body.clave;
   
+
+      console.log('Correo:', correo);
+    console.log('Clave:', clave);
+
       if(correo && clave)
       {
           query = `
